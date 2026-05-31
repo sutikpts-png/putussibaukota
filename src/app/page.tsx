@@ -5,6 +5,7 @@ export const revalidate = 0;
 
 export default async function Home() {
   const { data: web } = await supabase.from('pengaturan_web').select('*').eq('id', 1).single();
+  const { data: latestBerita } = await supabase.from('berita').select('*').order('tanggal_publikasi', { ascending: false }).limit(3);
 
   const heroBg = web?.hero_image_url || '/assets/img/hero-bg.jpg';
   const heroTitle = web?.hero_title || 'Selamat Datang di<br/><span class="text-yellow-300">Kelurahan Kedamin Hilir</span>';
@@ -53,6 +54,54 @@ export default async function Home() {
               <div className="text-xs text-green-200 mt-1">Luas Wilayah</div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* BERITA TERKINI */}
+      <section className="max-w-7xl mx-auto px-4 py-16 bg-gray-50/50">
+        <div className="text-center max-w-xl mx-auto mb-12">
+          <h3 className="text-2xl font-bold text-green-900">Berita</h3>
+          <p className="text-gray-500 text-sm mt-2">Berita up to date tercepat dan terpercaya.</p>
+          <div className="w-16 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        {(!latestBerita || latestBerita.length === 0) ? (
+          <div className="text-center py-10 bg-white rounded-xl border border-gray-100">
+            <i className="fas fa-newspaper text-3xl text-gray-300 mb-3"></i>
+            <p className="text-sm text-gray-400">Belum ada berita terbaru.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {latestBerita.map((item) => (
+              <article key={item.id} className="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100 flex flex-col h-full">
+                <div className="h-48 news-img flex items-center justify-center relative overflow-hidden bg-gray-100">
+                  {item.gambar_url ? (
+                    <img src={item.gambar_url} alt={item.judul} className="w-full h-full object-cover" />
+                  ) : (
+                    <i className="fas fa-image text-6xl text-gray-300"></i>
+                  )}
+                  <span className="absolute top-3 left-3 bg-green-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">
+                    {item.kategori || 'Info'}
+                  </span>
+                </div>
+                <div className="p-5 flex flex-col flex-grow space-y-2">
+                  <h4 className="font-bold text-gray-900 hover:text-green-700 transition text-sm leading-snug">
+                    <Link href={`/berita/${item.slug || item.id}`}>{item.judul}</Link>
+                  </h4>
+                  <p className="text-xs text-gray-500 line-clamp-3 flex-grow">{item.konten}</p>
+                  <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400 mt-auto">
+                    <span><i className="far fa-calendar mr-1"></i> {new Date(item.tanggal_publikasi).toLocaleDateString('id-ID')}</span>
+                    <Link href={`/berita/${item.slug || item.id}`} className="text-green-600 font-semibold hover:underline">Baca →</Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+        <div className="text-center mt-10">
+          <Link href="/berita" className="inline-block px-6 py-3 bg-white border border-green-600 text-green-700 font-bold text-sm rounded-lg hover:bg-green-50 transition">
+            Lihat Semua Berita
+          </Link>
         </div>
       </section>
 
