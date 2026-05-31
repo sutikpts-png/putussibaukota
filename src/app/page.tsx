@@ -18,8 +18,8 @@ export default async function Home() {
     <>
       {/* HERO SECTION */}
       <section className="relative text-white py-20 px-4 overflow-hidden hero-bg">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url('${heroBg}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-green-900/80 to-teal-800/60"></div>
+        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `url('${heroBg}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-green-900/90 to-teal-800/80 mix-blend-multiply"></div>
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
           <div className="space-y-6 fade-in">
             <span className="bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">Pemerintahan Kelurahan</span>
