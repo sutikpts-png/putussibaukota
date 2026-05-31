@@ -23,17 +23,18 @@ export default function HeroSlider({ images }: { images: string[] }) {
   }
 
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0 bg-green-900">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
-        speed={1500} // Smooth transition
+        fadeEffect={{ crossFade: true }}
+        speed={2500} // Very smooth, slow transition
         autoplay={{
-          delay: 5000, // 5 seconds per slide
+          delay: 8000, // 8 seconds per slide (slower)
           disableOnInteraction: false,
         }}
         loop={true}
-        allowTouchMove={false} // Disable swiping manually to not interfere with text selection
+        allowTouchMove={false}
         className="w-full h-full"
       >
         {images.map((img, index) => (
