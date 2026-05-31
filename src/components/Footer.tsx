@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import VisitorCounter from './VisitorCounter';
 
 export const revalidate = 0;
 
@@ -54,7 +55,7 @@ export default async function Footer() {
   return (
     <>
       <footer className="bg-gray-900 text-gray-300 text-sm pt-12 pb-6 border-t-4 border-yellow-400">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Kontak */}
           <div className="space-y-4">
             <h4 className="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Kontak Kami</h4>
@@ -122,6 +123,11 @@ export default async function Footer() {
                 <i className="fas fa-external-link-alt mr-1"></i> Buka di Google Maps
               </a>
             )}
+          </div>
+          {/* Statistik Pengunjung */}
+          <div className="space-y-4">
+            <h4 className="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Statistik Pengunjung</h4>
+            <VisitorCounter />
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2 text-center sm:text-left">
