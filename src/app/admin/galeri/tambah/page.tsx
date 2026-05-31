@@ -11,7 +11,7 @@ export default function TambahGaleri() {
   const [file, setFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     judul: '',
-    kategori: 'Kegiatan',
+    kategori: 'Foto',
     deskripsi: '',
     gambar_url: ''
   });
@@ -34,7 +34,7 @@ export default function TambahGaleri() {
         .upload(fileName, file);
 
       if (uploadError) {
-        alert('Gagal mengupload gambar: ' + uploadError.message + '\n\nPastikan bucket "gambar" sudah dibuat dan public di Supabase!');
+        alert('Gagal mengupload file: ' + uploadError.message + '\n\nPastikan bucket "gambar" sudah dibuat dan public di Supabase!');
         setLoading(false);
         return;
       }
@@ -44,7 +44,7 @@ export default function TambahGaleri() {
     }
 
     if (!finalGambarUrl) {
-      alert('Harap pilih gambar terlebih dahulu!');
+      alert('Harap pilih file (Foto/Video) terlebih dahulu!');
       setLoading(false);
       return;
     }
@@ -66,13 +66,13 @@ export default function TambahGaleri() {
         <Link href="/admin/galeri" className="text-gray-500 hover:text-green-700">
           <i className="fas fa-arrow-left"></i>
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900">Tambah Foto Galeri</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Tambah Media Galeri</h1>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Judul Foto</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Judul Media</label>
             <input 
               type="text" name="judul" required 
               value={formData.judul} onChange={handleChange}
@@ -86,16 +86,14 @@ export default function TambahGaleri() {
               value={formData.kategori} onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
             >
-              <option value="Kegiatan">Kegiatan</option>
-              <option value="Pembangunan">Pembangunan</option>
-              <option value="Sosial">Sosial</option>
-              <option value="Penghargaan">Penghargaan</option>
+              <option value="Foto">Foto</option>
+              <option value="Video">Video</option>
             </select>
           </div>
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Gambar *</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">File Media * (Gambar atau Video)</label>
             <input 
-              type="file" accept="image/*" required
+              type="file" accept="image/*,video/*" required
               onChange={(e) => {
                 if (e.target.files && e.target.files.length > 0) {
                   setFile(e.target.files[0]);
@@ -119,7 +117,7 @@ export default function TambahGaleri() {
               type="submit" disabled={loading}
               className="bg-green-700 hover:bg-green-800 disabled:opacity-50 text-white font-bold py-2 px-6 rounded-lg transition"
             >
-              {loading ? 'Menyimpan...' : 'Simpan Foto'}
+              {loading ? 'Menyimpan...' : 'Simpan Media'}
             </button>
           </div>
         </form>

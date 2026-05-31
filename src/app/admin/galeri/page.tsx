@@ -23,7 +23,7 @@ export default function AdminGaleri() {
   }
 
   async function hapusGaleri(id: string) {
-    if (confirm('Yakin ingin menghapus foto ini?')) {
+    if (confirm('Yakin ingin menghapus media ini?')) {
       await supabase.from('galeri').delete().eq('id', id);
       fetchGaleri();
     }
@@ -34,7 +34,7 @@ export default function AdminGaleri() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Kelola Galeri</h1>
         <Link href="/admin/galeri/tambah" className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
-          <i className="fas fa-plus mr-2"></i> Tambah Foto
+          <i className="fas fa-plus mr-2"></i> Tambah Media
         </Link>
       </div>
 
@@ -42,12 +42,16 @@ export default function AdminGaleri() {
         {loading ? (
           <div className="text-center text-gray-500 py-8">Memuat data...</div>
         ) : galeri.length === 0 ? (
-          <div className="text-center text-gray-500 py-8">Belum ada foto di galeri.</div>
+          <div className="text-center text-gray-500 py-8">Belum ada media di galeri.</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {galeri.map((item) => (
               <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden group relative">
-                <img src={item.gambar_url} alt={item.judul} className="w-full h-40 object-cover" />
+                {item.kategori === 'Video' || item.gambar_url.match(/\.(mp4|webm|ogg)$/i) ? (
+                  <video src={item.gambar_url} className="w-full h-40 object-cover bg-black" />
+                ) : (
+                  <img src={item.gambar_url} alt={item.judul} className="w-full h-40 object-cover" />
+                )}
                 <div className="p-3 bg-white">
                   <p className="text-xs font-bold text-green-700 mb-1">{item.kategori}</p>
                   <p className="text-sm font-semibold text-gray-900 truncate">{item.judul}</p>
