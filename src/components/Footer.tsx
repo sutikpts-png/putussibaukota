@@ -79,8 +79,16 @@ export default async function Footer() {
             <h4 className="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Tautan Cepat</h4>
             <ul className="text-xs space-y-2 grid grid-cols-1 sm:grid-cols-2">
               {tautanCepat.map((tautan: any, idx: number) => {
-                const isExternal = tautan.url.startsWith('http') || tautan.url.startsWith('www.');
-                const finalUrl = tautan.url.startsWith('www.') ? `https://${tautan.url}` : tautan.url;
+                let finalUrl = tautan.url.trim();
+                
+                // Jika tidak diawali http, /, atau #, asumsikan itu link luar (misal: kapuashulukab.go.id)
+                if (!finalUrl.startsWith('http') && !finalUrl.startsWith('/') && !finalUrl.startsWith('#')) {
+                  finalUrl = `https://${finalUrl}`;
+                } else if (finalUrl.startsWith('www.')) {
+                  finalUrl = `https://${finalUrl}`;
+                }
+
+                const isExternal = finalUrl.startsWith('http');
 
                 return (
                   <li key={idx}>
