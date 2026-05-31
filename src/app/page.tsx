@@ -32,6 +32,7 @@ export default async function Home() {
     <>
       {/* HERO SECTION */}
       <section className="relative text-white py-20 px-4 overflow-hidden bg-green-900">
+        <div className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-black/60 to-transparent z-20 pointer-events-none"></div>
         <HeroSlider images={heroBgArr} />
         <div className="absolute inset-0 bg-gradient-to-r from-green-900 via-green-900 to-teal-800 opacity-[0.65] z-0"></div>
         <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
