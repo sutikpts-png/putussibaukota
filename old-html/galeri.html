@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri - Kelurahan Kedamin Hilir</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<!-- TOP BAR -->
+<div class="bg-green-900 text-white text-xs py-2 px-4 shadow-inner">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+    <div class="flex items-center gap-4">
+      <span><i class="fas fa-phone mr-1 text-green-300"></i> (0274) 895123</span>
+      <span><i class="fas fa-envelope mr-1 text-green-300"></i> kedaminhilir@slemankab.go.id</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-youtube"></i></a>
+      <span class="border-l border-green-700 pl-4 text-green-200" id="tanggal-hari"></span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="bg-white sticky top-0 z-50 shadow-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 bg-green-700 flex items-center justify-center rounded-full text-white font-bold text-xs text-center leading-tight px-1 shadow">KEDAMIN<br>HILIR</div>
+      <div>
+        <h1 class="text-base font-bold text-green-900 uppercase tracking-tight leading-tight">Kelurahan Kedamin Hilir</h1>
+        <p class="text-xs text-gray-500 font-medium">Kecamatan Pakem · Kabupaten Sleman · DIY</p>
+      </div>
+    </div>
+    <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
+    <nav id="main-nav" class="hidden md:flex flex-wrap justify-center gap-1 text-sm font-semibold text-gray-700">
+      <a href="index.html" class="px-3 py-2 hover:text-green-600 transition">Beranda</a>
+      <div class="relative group dropdown">
+        <button class="px-3 py-2 hover:text-green-600 flex items-center gap-1 cursor-pointer">Profil <i class="fas fa-chevron-down text-xs"></i></button>
+        <div class="dropdown-menu absolute left-0 mt-1 hidden bg-white border border-gray-200 shadow-lg rounded py-2 w-48 z-50">
+          <a href="profil.html#sejarah" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Sejarah Kelurahan</a>
+          <a href="profil.html#visi-misi" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Visi &amp; Misi</a>
+          <a href="profil.html#struktur" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Struktur Organisasi</a>
+          <a href="profil.html#wilayah" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Data Wilayah</a>
+        </div>
+      </div>
+      <a href="berita.html" class="px-3 py-2 hover:text-green-600 transition">Berita</a>
+      <a href="layanan.html" class="px-3 py-2 hover:text-green-600 transition">Layanan</a>
+      <a href="potensi.html" class="px-3 py-2 hover:text-green-600 transition">Potensi</a>
+      <a href="galeri.html" class="px-3 py-2 text-green-700 border-b-2 border-green-600">Galeri</a>
+      <a href="kontak.html" class="px-3 py-2 hover:text-green-600 transition">Kontak</a>
+    </nav>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pb-4">
+    <a href="index.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Beranda</a>
+    <a href="profil.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Profil</a>
+    <a href="berita.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Berita</a>
+    <a href="layanan.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Layanan</a>
+    <a href="potensi.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Potensi</a>
+    <a href="galeri.html" class="block py-2 text-green-700 font-semibold text-sm border-b border-gray-100">Galeri</a>
+    <a href="kontak.html" class="block py-2 text-gray-700 font-semibold text-sm">Kontak</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero text-white py-12 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-2 text-xs text-green-300 mb-3">
+      <a href="index.html" class="hover:text-white">Beranda</a>
+      <i class="fas fa-chevron-right text-[10px]"></i>
+      <span class="text-white">Galeri</span>
+    </div>
+    <h2 class="text-3xl font-extrabold">Galeri Foto &amp; Kegiatan</h2>
+    <p class="text-green-200 mt-2 text-sm">Dokumentasi kegiatan dan momen penting Kelurahan Kedamin Hilir.</p>
+  </div>
+</section>
+
+<!-- GALERI CONTENT -->
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <!-- Filter -->
+  <div class="flex flex-wrap gap-2 mb-8">
+    <button class="px-4 py-2 bg-green-700 text-white text-xs font-semibold rounded-full">Semua</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 transition">Kegiatan</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 transition">Infrastruktur</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 transition">Budaya</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 transition">Alam</button>
+  </div>
+
+  <!-- Grid Galeri -->
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <!-- Item 1 -->
+    <div class="gallery-item h-48 bg-gradient-to-br from-green-300 to-teal-400 rounded-xl flex items-center justify-center relative group cursor-pointer">
+      <i class="fas fa-users text-5xl text-white/60"></i>
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center">
+        <div class="text-center text-white">
+          <i class="fas fa-search-plus text-2xl mb-1"></i>
+          <p class="text-xs font-semibold">Musrenbang 2026</p>
+        </div>
+      </div>
+    </div>
+    <!-- Item 2 -->
+    <div class="gallery-item h-48 bg-gradient-to-br from-blue-300 to-indigo-400 rounded-xl flex items-center justify-center relative group cursor-pointer">
+      <i class="fas fa-box-open text-5xl text-white/60"></i>
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center">
+        <div class="text-center text-white">
+          <i class="fas fa-search-plus text-2xl mb-1"></i>
+          <p class="text-xs font-semibold">Bansos Sembako</p>
+        </div>
+      </div>
+    </div>
+    <!-- Item 3 (large) -->
+    <div class="gallery-item h-48 md:col-span-2 bg-gradient-to-br from-amber-300 to-orange-400 rounded-xl flex items-center justify-center relative group cursor-pointer">
+      <i class="fas fa-road text-5xl text-white/60"></i>
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center">
+        <div class="text-center text-white">
+          <i class="fas fa-search-plus text-2xl mb-1"></i>
+          <p class="text-xs font-semibold">Perbaikan Jalan Dusun Kaliurang</p>
+        </div>
+      </div>
+    </div>
+    <!-- Item 4 -->
+    <div class="gallery-item h-48 bg-gradient-to-br from-purple-300 to-pink-400 rounded-xl flex items-center justify-center relative group cursor-pointer">
+      <i class="fas fa-music text-5xl text-white/60"></i>
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center">
+        <div class="text-center text-white">
+          <i class="fas fa-search-plus text-2xl mb-1"></i>
+          <p class="text-xs font-semibold">Festival Budaya 2026</p>
+        </div>
+      </div>
+    </div>
+    <!-- Item 5 -->
+    <div class="gallery-item h-48 bg-gradient-to-br from-red-300 to-rose-400 rounded-xl flex items-center justify-center relative group cursor-pointer">
+      <i class="fas fa-heartbeat text-5xl text-white/60"></i>
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center">
+        <div class="text-center text-white">
+          <i class="fas fa-search-plus text-2xl mb-1"></i>
+          <p class="text-xs font-semibold">Posyandu Balita</p>
+        </div>
+      </div>
+    </div>
+    <!-- Item 6 -->
+    <div class="gallery-item h-48 bg-gradient-to-br from-teal-300 to-cyan-400 rounded-xl flex items-center justify-center relative group cursor-pointer">
+      <i class="fas fa-seedling text-5xl text-white/60"></i>
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center">
+        <div class="text-center text-white">
+          <i class="fas fa-search-plus text-2xl mb-1"></i>
+          <p class="text-xs font-semibold">Tanam 1000 Pohon</p>
+        </div>
+      </div>
+    </div>
+    <!-- Item 7 -->
+    <div class="gallery-item h-48 bg-gradient-to-br from-yellow-300 to-amber-400 rounded-xl flex items-center justify-center relative group cursor-pointer">
+      <i class="fas fa-store text-5xl text-white/60"></i>
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center">
+        <div class="text-center text-white">
+          <i class="fas fa-search-plus text-2xl mb-1"></i>
+          <p class="text-xs font-semibold">Pameran UMKM</p>
+        </div>
+      </div>
+    </div>
+    <!-- Item 8 -->
+    <div class="gallery-item h-48 bg-gradient-to-br from-indigo-300 to-violet-400 rounded-xl flex items-center justify-center relative group cursor-pointer">
+      <i class="fas fa-graduation-cap text-5xl text-white/60"></i>
+      <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition rounded-xl flex items-center justify-center">
+        <div class="text-center text-white">
+          <i class="fas fa-search-plus text-2xl mb-1"></i>
+          <p class="text-xs font-semibold">Pelatihan Digital</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Tampilan foto">
+  <button id="lightbox-close" class="absolute top-4 right-4 text-white text-3xl z-10 hover:text-gray-300" aria-label="Tutup">
+    <i class="fas fa-times"></i>
+  </button>
+  <img id="lightbox-img" src="" alt="Foto galeri" class="max-w-[90vw] max-h-[85vh] rounded-lg shadow-2xl">
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-300 text-sm pt-12 pb-6 border-t-4 border-yellow-400">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Kontak Kami</h4>
+      <ul class="text-xs space-y-2 text-gray-400">
+        <li><i class="fas fa-map-marker-alt text-yellow-400 mr-2"></i> Jl. Kaliurang Km. 17, Kedamin Hilir, Pakem, Sleman 55582</li>
+        <li><i class="fas fa-phone text-yellow-400 mr-2"></i> (0274) 895123</li>
+        <li><i class="fas fa-envelope text-yellow-400 mr-2"></i> kedaminhilir@slemankab.go.id</li>
+      </ul>
+    </div>
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Tautan Cepat</h4>
+      <ul class="text-xs space-y-2 grid grid-cols-2">
+        <li><a href="index.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Beranda</a></li>
+        <li><a href="profil.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Profil</a></li>
+        <li><a href="berita.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Berita</a></li>
+        <li><a href="layanan.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Layanan</a></li>
+        <li><a href="potensi.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Potensi</a></li>
+        <li><a href="kontak.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Kontak</a></li>
+      </ul>
+    </div>
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Sosial Media</h4>
+      <div class="flex gap-3">
+        <a href="#" class="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-500 transition"><i class="fab fa-facebook text-sm"></i></a>
+        <a href="#" class="w-9 h-9 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-500 transition"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="w-9 h-9 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-youtube text-sm"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2">
+    <p>© 2026 Kelurahan Kedamin Hilir, Kecamatan Pakem, Kabupaten Sleman. All Rights Reserved.</p>
+    <p>Dikembangkan oleh Tim IT Kelurahan Kedamin Hilir</p>
+  </div>
+</footer>
+
+<div id="scrollTop" title="Kembali ke atas"><i class="fas fa-chevron-up text-sm"></i></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

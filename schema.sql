@@ -1,0 +1,94 @@
+-- Tabel Menu Utama
+CREATE TABLE public.menu (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_menu VARCHAR(255) NOT NULL,
+    urutan INTEGER NOT NULL DEFAULT 0,
+    link VARCHAR(255) NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Tabel Submenu
+CREATE TABLE public.submenu (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    menu_id UUID REFERENCES public.menu(id) ON DELETE CASCADE,
+    nama_submenu VARCHAR(255) NOT NULL,
+    urutan INTEGER NOT NULL DEFAULT 0,
+    link VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Tabel Dokumen / File Upload
+CREATE TABLE public.dokumen (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_dokumen VARCHAR(255) NOT NULL,
+    kategori VARCHAR(100) NULL,
+    file_url TEXT NOT NULL,
+    ukuran_byte BIGINT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Tabel Berita
+CREATE TABLE public.berita (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    judul VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    kategori VARCHAR(100) NOT NULL,
+    konten TEXT NOT NULL,
+    gambar_url TEXT NULL,
+    tanggal_publikasi DATE NOT NULL DEFAULT CURRENT_DATE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Tabel Galeri
+CREATE TABLE public.galeri (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    judul VARCHAR(255) NOT NULL,
+    deskripsi TEXT NULL,
+    kategori VARCHAR(100) NOT NULL,
+    gambar_url TEXT NOT NULL,
+    tanggal DATE NOT NULL DEFAULT CURRENT_DATE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Tabel Kontak
+CREATE TABLE public.kontak (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_instansi VARCHAR(255) NOT NULL,
+    alamat TEXT NOT NULL,
+    telepon VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    instagram VARCHAR(255) NULL,
+    facebook VARCHAR(255) NULL,
+    youtube VARCHAR(255) NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Tabel Layanan
+CREATE TABLE public.layanan (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_layanan VARCHAR(255) NOT NULL,
+    deskripsi TEXT NOT NULL,
+    persyaratan TEXT NULL,
+    ikon_url TEXT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Tabel Potensi
+CREATE TABLE public.potensi (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_potensi VARCHAR(255) NOT NULL,
+    deskripsi TEXT NOT NULL,
+    gambar_url TEXT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- Tabel Profil
+CREATE TABLE public.profil (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    sejarah TEXT NOT NULL,
+    visi TEXT NOT NULL,
+    misi TEXT NOT NULL,
+    struktur_organisasi_url TEXT NULL,
+    wilayah TEXT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);

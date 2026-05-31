@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berita - Kelurahan Kedamin Hilir</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<!-- TOP BAR -->
+<div class="bg-green-900 text-white text-xs py-2 px-4 shadow-inner">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+    <div class="flex items-center gap-4">
+      <span><i class="fas fa-phone mr-1 text-green-300"></i> (0274) 895123</span>
+      <span><i class="fas fa-envelope mr-1 text-green-300"></i> kedaminhilir@slemankab.go.id</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-youtube"></i></a>
+      <span class="border-l border-green-700 pl-4 text-green-200" id="tanggal-hari"></span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="bg-white sticky top-0 z-50 shadow-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 bg-green-700 flex items-center justify-center rounded-full text-white font-bold text-xs text-center leading-tight px-1 shadow">KEDAMIN<br>HILIR</div>
+      <div>
+        <h1 class="text-base font-bold text-green-900 uppercase tracking-tight leading-tight">Kelurahan Kedamin Hilir</h1>
+        <p class="text-xs text-gray-500 font-medium">Kecamatan Pakem · Kabupaten Sleman · DIY</p>
+      </div>
+    </div>
+    <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
+    <nav id="main-nav" class="hidden md:flex flex-wrap justify-center gap-1 text-sm font-semibold text-gray-700">
+      <a href="index.html" class="px-3 py-2 hover:text-green-600 transition">Beranda</a>
+      <div class="relative group dropdown">
+        <button class="px-3 py-2 hover:text-green-600 flex items-center gap-1 cursor-pointer">Profil <i class="fas fa-chevron-down text-xs"></i></button>
+        <div class="dropdown-menu absolute left-0 mt-1 hidden bg-white border border-gray-200 shadow-lg rounded py-2 w-48 z-50">
+          <a href="profil.html#sejarah" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Sejarah Kelurahan</a>
+          <a href="profil.html#visi-misi" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Visi &amp; Misi</a>
+          <a href="profil.html#struktur" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Struktur Organisasi</a>
+          <a href="profil.html#wilayah" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Data Wilayah</a>
+        </div>
+      </div>
+      <a href="berita.html" class="px-3 py-2 text-green-700 border-b-2 border-green-600">Berita</a>
+      <a href="layanan.html" class="px-3 py-2 hover:text-green-600 transition">Layanan</a>
+      <a href="potensi.html" class="px-3 py-2 hover:text-green-600 transition">Potensi</a>
+      <a href="galeri.html" class="px-3 py-2 hover:text-green-600 transition">Galeri</a>
+      <a href="kontak.html" class="px-3 py-2 hover:text-green-600 transition">Kontak</a>
+    </nav>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pb-4">
+    <a href="index.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Beranda</a>
+    <a href="profil.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Profil</a>
+    <a href="berita.html" class="block py-2 text-green-700 font-semibold text-sm border-b border-gray-100">Berita</a>
+    <a href="layanan.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Layanan</a>
+    <a href="potensi.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Potensi</a>
+    <a href="galeri.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Galeri</a>
+    <a href="kontak.html" class="block py-2 text-gray-700 font-semibold text-sm">Kontak</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero text-white py-12 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-2 text-xs text-green-300 mb-3">
+      <a href="index.html" class="hover:text-white">Beranda</a>
+      <i class="fas fa-chevron-right text-[10px]"></i>
+      <span class="text-white">Berita</span>
+    </div>
+    <h2 class="text-3xl font-extrabold">Berita &amp; Informasi</h2>
+    <p class="text-green-200 mt-2 text-sm">Informasi terkini seputar kegiatan dan pembangunan Kelurahan Kedamin Hilir.</p>
+  </div>
+</section>
+
+<!-- BERITA CONTENT -->
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <!-- Filter Kategori -->
+  <div class="flex flex-wrap gap-2 mb-8">
+    <button class="px-4 py-2 bg-green-700 text-white text-xs font-semibold rounded-full">Semua</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 hover:border-green-300 transition">Kegiatan</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 hover:border-green-300 transition">Sosial</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 hover:border-green-300 transition">Infrastruktur</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 hover:border-green-300 transition">Budaya</button>
+    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-full hover:bg-green-50 hover:border-green-300 transition">Pengumuman</button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Berita 1 -->
+    <article id="b1" class="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100">
+      <div class="h-48 bg-gradient-to-br from-green-100 to-teal-100 flex items-center justify-center relative overflow-hidden">
+        <i class="fas fa-users text-6xl text-green-300"></i>
+        <span class="absolute top-3 left-3 bg-green-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Kegiatan</span>
+      </div>
+      <div class="p-5 space-y-2">
+        <h4 class="font-bold text-gray-900 hover:text-green-700 transition text-sm leading-snug">
+          Musyawarah Rencana Pembangunan Kelurahan Tahun 2026 Resmi Dibuka
+        </h4>
+        <p class="text-xs text-gray-500 line-clamp-3">Kelurahan Kedamin Hilir menggelar Musrenbang tingkat kelurahan untuk menyusun prioritas pembangunan infrastruktur dan sosial tahun 2026. Kegiatan ini dihadiri oleh seluruh ketua RT/RW dan tokoh masyarakat.</p>
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+          <span><i class="far fa-calendar mr-1"></i> 10 Mei 2026</span>
+          <a href="#b1" class="text-green-600 font-semibold hover:underline">Baca →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Berita 2 -->
+    <article id="b2" class="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100">
+      <div class="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center relative overflow-hidden">
+        <i class="fas fa-box-open text-6xl text-blue-300"></i>
+        <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Sosial</span>
+      </div>
+      <div class="p-5 space-y-2">
+        <h4 class="font-bold text-gray-900 hover:text-green-700 transition text-sm leading-snug">
+          Pembagian Bantuan Sosial Sembako untuk 250 KK Kurang Mampu
+        </h4>
+        <p class="text-xs text-gray-500 line-clamp-3">Pemerintah Kelurahan Kedamin Hilir menyalurkan bantuan sembako kepada 250 kepala keluarga yang masuk dalam Data Terpadu Kesejahteraan Sosial (DTKS) tahun 2026.</p>
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+          <span><i class="far fa-calendar mr-1"></i> 20 Mei 2026</span>
+          <a href="#b2" class="text-green-600 font-semibold hover:underline">Baca →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Berita 3 -->
+    <article id="b3" class="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100">
+      <div class="h-48 bg-gradient-to-br from-amber-100 to-yellow-100 flex items-center justify-center relative overflow-hidden">
+        <i class="fas fa-road text-6xl text-amber-300"></i>
+        <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Infrastruktur</span>
+      </div>
+      <div class="p-5 space-y-2">
+        <h4 class="font-bold text-gray-900 hover:text-green-700 transition text-sm leading-snug">
+          Perbaikan Jalan Lingkungan Dusun Kaliurang Selesai Dikerjakan
+        </h4>
+        <p class="text-xs text-gray-500 line-clamp-3">Proyek perbaikan jalan lingkungan sepanjang 450 meter di Dusun Kaliurang telah rampung dikerjakan dan siap digunakan oleh warga setempat.</p>
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+          <span><i class="far fa-calendar mr-1"></i> 25 Mei 2026</span>
+          <a href="#b3" class="text-green-600 font-semibold hover:underline">Baca →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Berita 4 -->
+    <article id="b4" class="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100">
+      <div class="h-48 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center relative overflow-hidden">
+        <i class="fas fa-music text-6xl text-purple-300"></i>
+        <span class="absolute top-3 left-3 bg-purple-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Budaya</span>
+      </div>
+      <div class="p-5 space-y-2">
+        <h4 class="font-bold text-gray-900 hover:text-green-700 transition text-sm leading-snug">
+          Festival Budaya Kedamin Hilir 2026 Tampilkan Kesenian Lokal
+        </h4>
+        <p class="text-xs text-gray-500 line-clamp-3">Ratusan warga antusias menyaksikan penampilan kesenian tradisional dalam Festival Budaya Kedamin Hilir yang digelar di lapangan kelurahan selama dua hari.</p>
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+          <span><i class="far fa-calendar mr-1"></i> 28 Mei 2026</span>
+          <a href="#b4" class="text-green-600 font-semibold hover:underline">Baca →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Berita 5 -->
+    <article class="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100">
+      <div class="h-48 bg-gradient-to-br from-red-100 to-orange-100 flex items-center justify-center relative overflow-hidden">
+        <i class="fas fa-heartbeat text-6xl text-red-300"></i>
+        <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Kesehatan</span>
+      </div>
+      <div class="p-5 space-y-2">
+        <h4 class="font-bold text-gray-900 hover:text-green-700 transition text-sm leading-snug">
+          Posyandu Balita Catat Angka Stunting Turun 15% di Tahun 2026
+        </h4>
+        <p class="text-xs text-gray-500 line-clamp-3">Berkat program gizi intensif dan pemantauan rutin posyandu, angka stunting di Kelurahan Kedamin Hilir berhasil ditekan sebesar 15% dibanding tahun sebelumnya.</p>
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+          <span><i class="far fa-calendar mr-1"></i> 15 Mei 2026</span>
+          <a href="#" class="text-green-600 font-semibold hover:underline">Baca →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Berita 6 -->
+    <article class="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100">
+      <div class="h-48 bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center relative overflow-hidden">
+        <i class="fas fa-seedling text-6xl text-teal-300"></i>
+        <span class="absolute top-3 left-3 bg-teal-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase">Lingkungan</span>
+      </div>
+      <div class="p-5 space-y-2">
+        <h4 class="font-bold text-gray-900 hover:text-green-700 transition text-sm leading-snug">
+          Gerakan Tanam 1000 Pohon di Bantaran Sungai Boyong
+        </h4>
+        <p class="text-xs text-gray-500 line-clamp-3">Warga bersama pemerintah kelurahan melaksanakan gerakan penanaman 1000 pohon di sepanjang bantaran Sungai Boyong sebagai upaya pelestarian lingkungan.</p>
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+          <span><i class="far fa-calendar mr-1"></i> 5 Mei 2026</span>
+          <a href="#" class="text-green-600 font-semibold hover:underline">Baca →</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-center gap-2 mt-10">
+    <button class="w-9 h-9 bg-green-700 text-white rounded-lg text-sm font-bold">1</button>
+    <button class="w-9 h-9 bg-white border border-gray-200 text-gray-600 rounded-lg text-sm hover:bg-green-50 transition">2</button>
+    <button class="w-9 h-9 bg-white border border-gray-200 text-gray-600 rounded-lg text-sm hover:bg-green-50 transition">3</button>
+    <button class="w-9 h-9 bg-white border border-gray-200 text-gray-600 rounded-lg text-sm hover:bg-green-50 transition"><i class="fas fa-chevron-right text-xs"></i></button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-300 text-sm pt-12 pb-6 border-t-4 border-yellow-400">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Kontak Kami</h4>
+      <ul class="text-xs space-y-2 text-gray-400">
+        <li><i class="fas fa-map-marker-alt text-yellow-400 mr-2"></i> Jl. Kaliurang Km. 17, Kedamin Hilir, Pakem, Sleman 55582</li>
+        <li><i class="fas fa-phone text-yellow-400 mr-2"></i> (0274) 895123</li>
+        <li><i class="fas fa-envelope text-yellow-400 mr-2"></i> kedaminhilir@slemankab.go.id</li>
+      </ul>
+    </div>
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Tautan Cepat</h4>
+      <ul class="text-xs space-y-2 grid grid-cols-2">
+        <li><a href="index.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Beranda</a></li>
+        <li><a href="profil.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Profil</a></li>
+        <li><a href="berita.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Berita</a></li>
+        <li><a href="layanan.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Layanan</a></li>
+        <li><a href="potensi.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Potensi</a></li>
+        <li><a href="kontak.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Kontak</a></li>
+      </ul>
+    </div>
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Sosial Media</h4>
+      <div class="flex gap-3">
+        <a href="#" class="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-500 transition"><i class="fab fa-facebook text-sm"></i></a>
+        <a href="#" class="w-9 h-9 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-500 transition"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="w-9 h-9 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-youtube text-sm"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2">
+    <p>© 2026 Kelurahan Kedamin Hilir, Kecamatan Pakem, Kabupaten Sleman. All Rights Reserved.</p>
+    <p>Dikembangkan oleh Tim IT Kelurahan Kedamin Hilir</p>
+  </div>
+</footer>
+
+<div id="scrollTop" title="Kembali ke atas"><i class="fas fa-chevron-up text-sm"></i></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layanan - Kelurahan Kedamin Hilir</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<!-- TOP BAR -->
+<div class="bg-green-900 text-white text-xs py-2 px-4 shadow-inner">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+    <div class="flex items-center gap-4">
+      <span><i class="fas fa-phone mr-1 text-green-300"></i> (0274) 895123</span>
+      <span><i class="fas fa-envelope mr-1 text-green-300"></i> kedaminhilir@slemankab.go.id</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-youtube"></i></a>
+      <span class="border-l border-green-700 pl-4 text-green-200" id="tanggal-hari"></span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="bg-white sticky top-0 z-50 shadow-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 bg-green-700 flex items-center justify-center rounded-full text-white font-bold text-xs text-center leading-tight px-1 shadow">KEDAMIN<br>HILIR</div>
+      <div>
+        <h1 class="text-base font-bold text-green-900 uppercase tracking-tight leading-tight">Kelurahan Kedamin Hilir</h1>
+        <p class="text-xs text-gray-500 font-medium">Kecamatan Pakem · Kabupaten Sleman · DIY</p>
+      </div>
+    </div>
+    <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
+    <nav id="main-nav" class="hidden md:flex flex-wrap justify-center gap-1 text-sm font-semibold text-gray-700">
+      <a href="index.html" class="px-3 py-2 hover:text-green-600 transition">Beranda</a>
+      <div class="relative group dropdown">
+        <button class="px-3 py-2 hover:text-green-600 flex items-center gap-1 cursor-pointer">Profil <i class="fas fa-chevron-down text-xs"></i></button>
+        <div class="dropdown-menu absolute left-0 mt-1 hidden bg-white border border-gray-200 shadow-lg rounded py-2 w-48 z-50">
+          <a href="profil.html#sejarah" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Sejarah Kelurahan</a>
+          <a href="profil.html#visi-misi" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Visi &amp; Misi</a>
+          <a href="profil.html#struktur" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Struktur Organisasi</a>
+          <a href="profil.html#wilayah" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Data Wilayah</a>
+        </div>
+      </div>
+      <a href="berita.html" class="px-3 py-2 hover:text-green-600 transition">Berita</a>
+      <a href="layanan.html" class="px-3 py-2 text-green-700 border-b-2 border-green-600">Layanan</a>
+      <a href="potensi.html" class="px-3 py-2 hover:text-green-600 transition">Potensi</a>
+      <a href="galeri.html" class="px-3 py-2 hover:text-green-600 transition">Galeri</a>
+      <a href="kontak.html" class="px-3 py-2 hover:text-green-600 transition">Kontak</a>
+    </nav>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pb-4">
+    <a href="index.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Beranda</a>
+    <a href="profil.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Profil</a>
+    <a href="berita.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Berita</a>
+    <a href="layanan.html" class="block py-2 text-green-700 font-semibold text-sm border-b border-gray-100">Layanan</a>
+    <a href="potensi.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Potensi</a>
+    <a href="galeri.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Galeri</a>
+    <a href="kontak.html" class="block py-2 text-gray-700 font-semibold text-sm">Kontak</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero text-white py-12 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-2 text-xs text-green-300 mb-3">
+      <a href="index.html" class="hover:text-white">Beranda</a>
+      <i class="fas fa-chevron-right text-[10px]"></i>
+      <span class="text-white">Layanan</span>
+    </div>
+    <h2 class="text-3xl font-extrabold">Layanan Administrasi</h2>
+    <p class="text-green-200 mt-2 text-sm">Informasi persyaratan dan prosedur layanan administrasi kependudukan kelurahan.</p>
+  </div>
+</section>
+
+<!-- JAM LAYANAN -->
+<div class="bg-yellow-50 border-b border-yellow-200 py-4 px-4">
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center gap-6 text-sm">
+    <div class="flex items-center gap-2 text-yellow-800">
+      <i class="fas fa-clock text-yellow-600"></i>
+      <strong>Jam Pelayanan:</strong>
+    </div>
+    <span class="text-gray-700"><i class="fas fa-calendar-day text-green-600 mr-1"></i> Senin – Kamis: <strong>08.00 – 15.30 WIB</strong></span>
+    <span class="text-gray-700"><i class="fas fa-calendar-day text-green-600 mr-1"></i> Jumat: <strong>08.00 – 14.00 WIB</strong></span>
+    <span class="text-red-600 font-semibold"><i class="fas fa-times-circle mr-1"></i> Sabtu, Minggu & Hari Libur: Tutup</span>
+  </div>
+</div>
+
+<!-- LAYANAN CARDS -->
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- KTP -->
+    <div id="ktp" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover hover:shadow-md">
+      <div class="bg-green-600 text-white px-6 py-4 flex items-center gap-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><i class="fas fa-id-card text-xl"></i></div>
+        <h4 class="font-bold text-base">Surat Pengantar KTP</h4>
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-gray-600 mb-4">Surat pengantar dari kelurahan untuk pembuatan atau perubahan Kartu Tanda Penduduk (KTP) di Dinas Kependudukan dan Catatan Sipil.</p>
+        <h5 class="font-bold text-sm text-gray-800 mb-2"><i class="fas fa-list-ul text-green-600 mr-2"></i>Persyaratan:</h5>
+        <ul class="text-xs text-gray-600 space-y-1 mb-4">
+          <li class="flex gap-2"><i class="fas fa-check text-green-500 mt-0.5"></i> Fotokopi Kartu Keluarga (KK)</li>
+          <li class="flex gap-2"><i class="fas fa-check text-green-500 mt-0.5"></i> Surat keterangan pindah (jika pindah domisili)</li>
+          <li class="flex gap-2"><i class="fas fa-check text-green-500 mt-0.5"></i> Pas foto 3x4 (2 lembar)</li>
+          <li class="flex gap-2"><i class="fas fa-check text-green-500 mt-0.5"></i> Mengisi formulir F-1.01</li>
+        </ul>
+        <div class="flex items-center justify-between text-xs">
+          <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold"><i class="fas fa-clock mr-1"></i> Proses: 1 Hari Kerja</span>
+          <span class="text-gray-400">Gratis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KK -->
+    <div id="kk" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover hover:shadow-md">
+      <div class="bg-blue-600 text-white px-6 py-4 flex items-center gap-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><i class="fas fa-users text-xl"></i></div>
+        <h4 class="font-bold text-base">Kartu Keluarga (KK)</h4>
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-gray-600 mb-4">Pengantar perubahan atau pembuatan Kartu Keluarga baru akibat pernikahan, kelahiran, kematian, atau perpindahan anggota keluarga.</p>
+        <h5 class="font-bold text-sm text-gray-800 mb-2"><i class="fas fa-list-ul text-blue-600 mr-2"></i>Persyaratan:</h5>
+        <ul class="text-xs text-gray-600 space-y-1 mb-4">
+          <li class="flex gap-2"><i class="fas fa-check text-blue-500 mt-0.5"></i> KK lama (asli)</li>
+          <li class="flex gap-2"><i class="fas fa-check text-blue-500 mt-0.5"></i> Akta nikah / akta kelahiran / akta kematian (sesuai keperluan)</li>
+          <li class="flex gap-2"><i class="fas fa-check text-blue-500 mt-0.5"></i> Surat keterangan pindah (jika pindah)</li>
+          <li class="flex gap-2"><i class="fas fa-check text-blue-500 mt-0.5"></i> Mengisi formulir F-1.05</li>
+        </ul>
+        <div class="flex items-center justify-between text-xs">
+          <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-semibold"><i class="fas fa-clock mr-1"></i> Proses: 1-3 Hari Kerja</span>
+          <span class="text-gray-400">Gratis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domisili -->
+    <div id="domisili" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover hover:shadow-md">
+      <div class="bg-amber-600 text-white px-6 py-4 flex items-center gap-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><i class="fas fa-house-user text-xl"></i></div>
+        <h4 class="font-bold text-base">Surat Keterangan Domisili</h4>
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-gray-600 mb-4">Surat keterangan resmi yang menyatakan bahwa seseorang berdomisili di wilayah Kelurahan Kedamin Hilir.</p>
+        <h5 class="font-bold text-sm text-gray-800 mb-2"><i class="fas fa-list-ul text-amber-600 mr-2"></i>Persyaratan:</h5>
+        <ul class="text-xs text-gray-600 space-y-1 mb-4">
+          <li class="flex gap-2"><i class="fas fa-check text-amber-500 mt-0.5"></i> Fotokopi KTP</li>
+          <li class="flex gap-2"><i class="fas fa-check text-amber-500 mt-0.5"></i> Fotokopi KK</li>
+          <li class="flex gap-2"><i class="fas fa-check text-amber-500 mt-0.5"></i> Surat pengantar RT/RW</li>
+          <li class="flex gap-2"><i class="fas fa-check text-amber-500 mt-0.5"></i> Mengisi formulir permohonan</li>
+        </ul>
+        <div class="flex items-center justify-between text-xs">
+          <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full font-semibold"><i class="fas fa-clock mr-1"></i> Proses: 1 Hari Kerja</span>
+          <span class="text-gray-400">Gratis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usaha -->
+    <div id="usaha" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover hover:shadow-md">
+      <div class="bg-purple-600 text-white px-6 py-4 flex items-center gap-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><i class="fas fa-store text-xl"></i></div>
+        <h4 class="font-bold text-base">Surat Keterangan Usaha</h4>
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-gray-600 mb-4">Surat keterangan yang menyatakan bahwa pemohon menjalankan usaha di wilayah kelurahan, diperlukan untuk pengajuan kredit atau perizinan usaha.</p>
+        <h5 class="font-bold text-sm text-gray-800 mb-2"><i class="fas fa-list-ul text-purple-600 mr-2"></i>Persyaratan:</h5>
+        <ul class="text-xs text-gray-600 space-y-1 mb-4">
+          <li class="flex gap-2"><i class="fas fa-check text-purple-500 mt-0.5"></i> Fotokopi KTP pemohon</li>
+          <li class="flex gap-2"><i class="fas fa-check text-purple-500 mt-0.5"></i> Fotokopi KK</li>
+          <li class="flex gap-2"><i class="fas fa-check text-purple-500 mt-0.5"></i> Surat pengantar RT/RW</li>
+          <li class="flex gap-2"><i class="fas fa-check text-purple-500 mt-0.5"></i> Foto lokasi usaha</li>
+        </ul>
+        <div class="flex items-center justify-between text-xs">
+          <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold"><i class="fas fa-clock mr-1"></i> Proses: 1-2 Hari Kerja</span>
+          <span class="text-gray-400">Gratis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKCK -->
+    <div id="skck" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover hover:shadow-md">
+      <div class="bg-red-600 text-white px-6 py-4 flex items-center gap-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><i class="fas fa-shield-alt text-xl"></i></div>
+        <h4 class="font-bold text-base">Pengantar SKCK</h4>
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-gray-600 mb-4">Surat pengantar dari kelurahan untuk pengajuan Surat Keterangan Catatan Kepolisian (SKCK) di Polsek atau Polres setempat.</p>
+        <h5 class="font-bold text-sm text-gray-800 mb-2"><i class="fas fa-list-ul text-red-600 mr-2"></i>Persyaratan:</h5>
+        <ul class="text-xs text-gray-600 space-y-1 mb-4">
+          <li class="flex gap-2"><i class="fas fa-check text-red-500 mt-0.5"></i> Fotokopi KTP</li>
+          <li class="flex gap-2"><i class="fas fa-check text-red-500 mt-0.5"></i> Fotokopi KK</li>
+          <li class="flex gap-2"><i class="fas fa-check text-red-500 mt-0.5"></i> Pas foto 4x6 (4 lembar, latar merah)</li>
+          <li class="flex gap-2"><i class="fas fa-check text-red-500 mt-0.5"></i> Surat pengantar RT/RW</li>
+        </ul>
+        <div class="flex items-center justify-between text-xs">
+          <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full font-semibold"><i class="fas fa-clock mr-1"></i> Proses: 1 Hari Kerja</span>
+          <span class="text-gray-400">Gratis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nikah -->
+    <div id="nikah" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover hover:shadow-md">
+      <div class="bg-pink-600 text-white px-6 py-4 flex items-center gap-3">
+        <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"><i class="fas fa-heart text-xl"></i></div>
+        <h4 class="font-bold text-base">Pengantar Nikah (N1-N4)</h4>
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-gray-600 mb-4">Surat pengantar nikah dari kelurahan (formulir N1 s.d. N4) yang diperlukan untuk pendaftaran pernikahan di KUA Kecamatan.</p>
+        <h5 class="font-bold text-sm text-gray-800 mb-2"><i class="fas fa-list-ul text-pink-600 mr-2"></i>Persyaratan:</h5>
+        <ul class="text-xs text-gray-600 space-y-1 mb-4">
+          <li class="flex gap-2"><i class="fas fa-check text-pink-500 mt-0.5"></i> Fotokopi KTP calon pengantin</li>
+          <li class="flex gap-2"><i class="fas fa-check text-pink-500 mt-0.5"></i> Fotokopi KK</li>
+          <li class="flex gap-2"><i class="fas fa-check text-pink-500 mt-0.5"></i> Fotokopi akta kelahiran</li>
+          <li class="flex gap-2"><i class="fas fa-check text-pink-500 mt-0.5"></i> Surat pengantar RT/RW</li>
+          <li class="flex gap-2"><i class="fas fa-check text-pink-500 mt-0.5"></i> Pas foto 2x3 (4 lembar)</li>
+        </ul>
+        <div class="flex items-center justify-between text-xs">
+          <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-semibold"><i class="fas fa-clock mr-1"></i> Proses: 1 Hari Kerja</span>
+          <span class="text-gray-400">Gratis</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Alur Pelayanan -->
+  <div class="mt-12 bg-green-50 rounded-2xl p-8 border border-green-200">
+    <h3 class="text-xl font-bold text-green-900 mb-6 text-center"><i class="fas fa-route mr-2 text-green-600"></i>Alur Pelayanan</h3>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow">1</div>
+        <p class="text-xs text-gray-700 font-medium">Ambil Nomor Antrian</p>
+      </div>
+      <div class="hidden md:flex items-center justify-center text-green-400"><i class="fas fa-arrow-right text-xl"></i></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow">2</div>
+        <p class="text-xs text-gray-700 font-medium">Serahkan Berkas</p>
+      </div>
+      <div class="hidden md:flex items-center justify-center text-green-400"><i class="fas fa-arrow-right text-xl"></i></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow">3</div>
+        <p class="text-xs text-gray-700 font-medium">Verifikasi Petugas</p>
+      </div>
+      <div class="hidden md:flex items-center justify-center text-green-400"><i class="fas fa-arrow-right text-xl"></i></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow">4</div>
+        <p class="text-xs text-gray-700 font-medium">Tanda Tangan Lurah</p>
+      </div>
+      <div class="hidden md:flex items-center justify-center text-green-400"><i class="fas fa-arrow-right text-xl"></i></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow">5</div>
+        <p class="text-xs text-gray-700 font-medium">Surat Selesai</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-300 text-sm pt-12 pb-6 border-t-4 border-yellow-400">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Kontak Kami</h4>
+      <ul class="text-xs space-y-2 text-gray-400">
+        <li><i class="fas fa-map-marker-alt text-yellow-400 mr-2"></i> Jl. Kaliurang Km. 17, Kedamin Hilir, Pakem, Sleman 55582</li>
+        <li><i class="fas fa-phone text-yellow-400 mr-2"></i> (0274) 895123</li>
+        <li><i class="fas fa-envelope text-yellow-400 mr-2"></i> kedaminhilir@slemankab.go.id</li>
+        <li><i class="fas fa-clock text-yellow-400 mr-2"></i> Senin–Jumat: 08.00–16.00 WIB</li>
+      </ul>
+    </div>
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Tautan Cepat</h4>
+      <ul class="text-xs space-y-2 grid grid-cols-2">
+        <li><a href="index.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Beranda</a></li>
+        <li><a href="profil.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Profil</a></li>
+        <li><a href="berita.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Berita</a></li>
+        <li><a href="layanan.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Layanan</a></li>
+        <li><a href="potensi.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Potensi</a></li>
+        <li><a href="kontak.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Kontak</a></li>
+      </ul>
+    </div>
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Sosial Media</h4>
+      <div class="flex gap-3">
+        <a href="#" class="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-500 transition"><i class="fab fa-facebook text-sm"></i></a>
+        <a href="#" class="w-9 h-9 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-500 transition"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="w-9 h-9 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-youtube text-sm"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2">
+    <p>© 2026 Kelurahan Kedamin Hilir, Kecamatan Pakem, Kabupaten Sleman. All Rights Reserved.</p>
+    <p>Dikembangkan oleh Tim IT Kelurahan Kedamin Hilir</p>
+  </div>
+</footer>
+
+<div id="scrollTop" title="Kembali ke atas"><i class="fas fa-chevron-up text-sm"></i></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

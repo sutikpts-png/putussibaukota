@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontak - Kelurahan Kedamin Hilir</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<!-- TOP BAR -->
+<div class="bg-green-900 text-white text-xs py-2 px-4 shadow-inner">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+    <div class="flex items-center gap-4">
+      <span><i class="fas fa-phone mr-1 text-green-300"></i> (0274) 895123</span>
+      <span><i class="fas fa-envelope mr-1 text-green-300"></i> kedaminhilir@slemankab.go.id</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="hover:text-green-300 transition"><i class="fab fa-youtube"></i></a>
+      <span class="border-l border-green-700 pl-4 text-green-200" id="tanggal-hari"></span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="bg-white sticky top-0 z-50 shadow-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 bg-green-700 flex items-center justify-center rounded-full text-white font-bold text-xs text-center leading-tight px-1 shadow">KEDAMIN<br>HILIR</div>
+      <div>
+        <h1 class="text-base font-bold text-green-900 uppercase tracking-tight leading-tight">Kelurahan Kedamin Hilir</h1>
+        <p class="text-xs text-gray-500 font-medium">Kecamatan Pakem · Kabupaten Sleman · DIY</p>
+      </div>
+    </div>
+    <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
+    <nav id="main-nav" class="hidden md:flex flex-wrap justify-center gap-1 text-sm font-semibold text-gray-700">
+      <a href="index.html" class="px-3 py-2 hover:text-green-600 transition">Beranda</a>
+      <div class="relative group dropdown">
+        <button class="px-3 py-2 hover:text-green-600 flex items-center gap-1 cursor-pointer">Profil <i class="fas fa-chevron-down text-xs"></i></button>
+        <div class="dropdown-menu absolute left-0 mt-1 hidden bg-white border border-gray-200 shadow-lg rounded py-2 w-48 z-50">
+          <a href="profil.html#sejarah" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Sejarah Kelurahan</a>
+          <a href="profil.html#visi-misi" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Visi &amp; Misi</a>
+          <a href="profil.html#struktur" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Struktur Organisasi</a>
+          <a href="profil.html#wilayah" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Data Wilayah</a>
+        </div>
+      </div>
+      <a href="berita.html" class="px-3 py-2 hover:text-green-600 transition">Berita</a>
+      <a href="layanan.html" class="px-3 py-2 hover:text-green-600 transition">Layanan</a>
+      <a href="potensi.html" class="px-3 py-2 hover:text-green-600 transition">Potensi</a>
+      <a href="galeri.html" class="px-3 py-2 hover:text-green-600 transition">Galeri</a>
+      <a href="kontak.html" class="px-3 py-2 text-green-700 border-b-2 border-green-600">Kontak</a>
+    </nav>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pb-4">
+    <a href="index.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Beranda</a>
+    <a href="profil.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Profil</a>
+    <a href="berita.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Berita</a>
+    <a href="layanan.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Layanan</a>
+    <a href="potensi.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Potensi</a>
+    <a href="galeri.html" class="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Galeri</a>
+    <a href="kontak.html" class="block py-2 text-green-700 font-semibold text-sm">Kontak</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero text-white py-12 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-2 text-xs text-green-300 mb-3">
+      <a href="index.html" class="hover:text-white">Beranda</a>
+      <i class="fas fa-chevron-right text-[10px]"></i>
+      <span class="text-white">Kontak</span>
+    </div>
+    <h2 class="text-3xl font-extrabold">Hubungi Kami</h2>
+    <p class="text-green-200 mt-2 text-sm">Sampaikan pertanyaan, saran, atau pengaduan Anda kepada kami.</p>
+  </div>
+</section>
+
+<!-- KONTAK CONTENT -->
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <!-- Info Kontak -->
+    <div class="space-y-5">
+      <h3 class="text-xl font-bold text-green-900 border-b border-gray-200 pb-3">Informasi Kontak</h3>
+
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex gap-4 items-start card-hover">
+        <div class="w-10 h-10 bg-green-100 text-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div>
+          <h5 class="font-bold text-sm text-gray-800 mb-1">Alamat Kantor</h5>
+          <p class="text-xs text-gray-500 leading-relaxed">Jl. Kaliurang Km. 17, Kedamin Hilir, Kecamatan Pakem, Kabupaten Sleman, DIY 55582</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex gap-4 items-start card-hover">
+        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-phone"></i>
+        </div>
+        <div>
+          <h5 class="font-bold text-sm text-gray-800 mb-1">Telepon</h5>
+          <p class="text-xs text-gray-500">(0274) 895123</p>
+          <p class="text-xs text-gray-500">WhatsApp: 0812-3456-7890</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex gap-4 items-start card-hover">
+        <div class="w-10 h-10 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div>
+          <h5 class="font-bold text-sm text-gray-800 mb-1">Email</h5>
+          <p class="text-xs text-gray-500">kedaminhilir@slemankab.go.id</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex gap-4 items-start card-hover">
+        <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div>
+          <h5 class="font-bold text-sm text-gray-800 mb-1">Jam Pelayanan</h5>
+          <p class="text-xs text-gray-500">Senin – Kamis: 08.00 – 15.30 WIB</p>
+          <p class="text-xs text-gray-500">Jumat: 08.00 – 14.00 WIB</p>
+          <p class="text-xs text-red-500 font-medium">Sabtu, Minggu &amp; Libur: Tutup</p>
+        </div>
+      </div>
+
+      <!-- Sosmed -->
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+        <h5 class="font-bold text-sm text-gray-800 mb-3">Ikuti Kami</h5>
+        <div class="flex gap-3">
+          <a href="#" class="flex items-center gap-2 bg-blue-600 text-white text-xs px-3 py-2 rounded-lg hover:bg-blue-700 transition">
+            <i class="fab fa-facebook"></i> Facebook
+          </a>
+          <a href="#" class="flex items-center gap-2 bg-pink-600 text-white text-xs px-3 py-2 rounded-lg hover:bg-pink-700 transition">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Pengaduan -->
+    <div class="lg:col-span-2">
+      <h3 class="text-xl font-bold text-green-900 border-b border-gray-200 pb-3 mb-6" id="pengaduan">
+        <i class="fas fa-paper-plane mr-2 text-green-600"></i>Form Pengaduan &amp; Pesan
+      </h3>
+      <form id="form-pengaduan" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-5" novalidate>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label for="nama" class="block text-xs font-semibold text-gray-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+            <input type="text" id="nama" name="nama" class="form-input" placeholder="Masukkan nama lengkap Anda" required>
+          </div>
+          <div>
+            <label for="nik" class="block text-xs font-semibold text-gray-700 mb-1">NIK (Opsional)</label>
+            <input type="text" id="nik" name="nik" class="form-input" placeholder="16 digit NIK" maxlength="16">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label for="telepon" class="block text-xs font-semibold text-gray-700 mb-1">No. Telepon / WA <span class="text-red-500">*</span></label>
+            <input type="tel" id="telepon" name="telepon" class="form-input" placeholder="08xx-xxxx-xxxx" required>
+          </div>
+          <div>
+            <label for="email" class="block text-xs font-semibold text-gray-700 mb-1">Email (Opsional)</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="email@contoh.com">
+          </div>
+        </div>
+        <div>
+          <label for="kategori" class="block text-xs font-semibold text-gray-700 mb-1">Kategori <span class="text-red-500">*</span></label>
+          <select id="kategori" name="kategori" class="form-input" required>
+            <option value="">-- Pilih Kategori --</option>
+            <option value="pengaduan">Pengaduan</option>
+            <option value="saran">Saran &amp; Masukan</option>
+            <option value="pertanyaan">Pertanyaan Layanan</option>
+            <option value="informasi">Permintaan Informasi</option>
+            <option value="lainnya">Lainnya</option>
+          </select>
+        </div>
+        <div>
+          <label for="subjek" class="block text-xs font-semibold text-gray-700 mb-1">Subjek <span class="text-red-500">*</span></label>
+          <input type="text" id="subjek" name="subjek" class="form-input" placeholder="Tuliskan subjek pesan Anda" required>
+        </div>
+        <div>
+          <label for="pesan" class="block text-xs font-semibold text-gray-700 mb-1">Pesan / Isi Pengaduan <span class="text-red-500">*</span></label>
+          <textarea id="pesan" name="pesan" rows="5" class="form-input resize-none" placeholder="Tuliskan pesan, pengaduan, atau pertanyaan Anda secara lengkap dan jelas..." required></textarea>
+        </div>
+        <div class="flex items-start gap-2">
+          <input type="checkbox" id="setuju" name="setuju" class="mt-0.5 accent-green-600" required>
+          <label for="setuju" class="text-xs text-gray-600">Saya menyetujui bahwa data yang saya berikan akan digunakan untuk keperluan pelayanan kelurahan dan tidak akan disalahgunakan.</label>
+        </div>
+        <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-6 rounded-lg transition flex items-center justify-center gap-2">
+          <i class="fas fa-paper-plane"></i> Kirim Pesan
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Peta -->
+  <div class="mt-12">
+    <h3 class="text-xl font-bold text-green-900 mb-4"><i class="fas fa-map-marked-alt mr-2 text-green-600"></i>Lokasi Kantor Kelurahan</h3>
+    <div class="w-full h-72 bg-gray-200 rounded-xl overflow-hidden border border-gray-200 flex items-center justify-center">
+      <div class="text-center text-gray-500">
+        <i class="fas fa-map-marked-alt text-5xl text-green-400 mb-3"></i>
+        <p class="font-semibold text-sm">Kantor Kelurahan Kedamin Hilir</p>
+        <p class="text-xs mt-1">Jl. Kaliurang Km. 17, Pakem, Sleman</p>
+        <a href="https://maps.google.com" target="_blank" class="inline-block mt-3 bg-green-600 text-white text-xs px-4 py-2 rounded-lg hover:bg-green-700 transition">
+          <i class="fas fa-external-link-alt mr-1"></i> Buka di Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-300 text-sm pt-12 pb-6 border-t-4 border-yellow-400">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Kontak Kami</h4>
+      <ul class="text-xs space-y-2 text-gray-400">
+        <li><i class="fas fa-map-marker-alt text-yellow-400 mr-2"></i> Jl. Kaliurang Km. 17, Kedamin Hilir, Pakem, Sleman 55582</li>
+        <li><i class="fas fa-phone text-yellow-400 mr-2"></i> (0274) 895123</li>
+        <li><i class="fas fa-envelope text-yellow-400 mr-2"></i> kedaminhilir@slemankab.go.id</li>
+        <li><i class="fas fa-clock text-yellow-400 mr-2"></i> Senin–Jumat: 08.00–16.00 WIB</li>
+      </ul>
+    </div>
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Tautan Cepat</h4>
+      <ul class="text-xs space-y-2 grid grid-cols-2">
+        <li><a href="index.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Beranda</a></li>
+        <li><a href="profil.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Profil</a></li>
+        <li><a href="berita.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Berita</a></li>
+        <li><a href="layanan.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Layanan</a></li>
+        <li><a href="potensi.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Potensi</a></li>
+        <li><a href="kontak.html" class="hover:text-yellow-400 transition"><i class="fas fa-chevron-right text-[10px] mr-1"></i> Kontak</a></li>
+      </ul>
+    </div>
+    <div class="space-y-4">
+      <h4 class="text-white font-bold text-base uppercase tracking-wide border-b border-gray-700 pb-2">Sosial Media</h4>
+      <div class="flex gap-3">
+        <a href="#" class="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-500 transition"><i class="fab fa-facebook text-sm"></i></a>
+        <a href="#" class="w-9 h-9 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-500 transition"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="w-9 h-9 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 transition"><i class="fab fa-youtube text-sm"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2">
+    <p>© 2026 Kelurahan Kedamin Hilir, Kecamatan Pakem, Kabupaten Sleman. All Rights Reserved.</p>
+    <p>Dikembangkan oleh Tim IT Kelurahan Kedamin Hilir</p>
+  </div>
+</footer>
+
+<div id="scrollTop" title="Kembali ke atas"><i class="fas fa-chevron-up text-sm"></i></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
