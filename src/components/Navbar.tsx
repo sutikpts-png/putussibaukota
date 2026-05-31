@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [menus, setMenus] = useState<any[]>([]);
   const [web, setWeb] = useState<any>({
     telepon: '(0274) 895123',
     email: 'kedaminhilir@slemankab.go.id',
@@ -17,11 +18,31 @@ export default function Navbar() {
   });
 
   useEffect(() => {
-    async function fetchWeb() {
-      const { data } = await supabase.from('pengaturan_web').select('*').eq('id', 1).single();
-      if (data) setWeb(data);
+    async function fetchData() {
+      // Fetch web settings
+      const { data: webData } = await supabase.from('pengaturan_web').select('*').eq('id', 1).single();
+      if (webData) setWeb(webData);
+
+      // Fetch menu navigation
+      const { data: menuData } = await supabase
+        .from('menu_navigasi')
+        .select('*')
+        .order('parent_id', { ascending: true, nullsFirst: true })
+        .order('urutan', { ascending: true });
+
+      if (menuData) {
+        const parentMenus = menuData.filter(m => !m.parent_id);
+        const childMenus = menuData.filter(m => m.parent_id);
+        
+        const structuredMenus = parentMenus.map(parent => ({
+          ...parent,
+          children: childMenus.filter(child => child.parent_id === parent.id).sort((a, b) => a.urutan - b.urutan)
+        })).sort((a, b) => a.urutan - b.urutan);
+
+        setMenus(structuredMenus);
+      }
     }
-    fetchWeb();
+    fetchData();
   }, []);
 
   return (
@@ -71,36 +92,61 @@ export default function Navbar() {
           </button>
           
           <nav className="hidden md:flex flex-wrap justify-center gap-1 text-sm font-semibold text-gray-700">
-            <Link href="/" className="px-3 py-2 hover:text-green-600 transition">Beranda</Link>
-            <div className="relative group dropdown">
-              <button className="px-3 py-2 hover:text-green-600 flex items-center gap-1 cursor-pointer">
-                Profil <i className="fas fa-chevron-down text-xs"></i>
-              </button>
-              <div className="absolute left-0 mt-1 hidden group-hover:block bg-white border border-gray-200 shadow-lg rounded py-2 w-48 z-50">
-                <Link href="/profil#sejarah" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Sejarah Kelurahan</Link>
-                <Link href="/profil#visi-misi" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Visi & Misi</Link>
-                <Link href="/profil#struktur" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Struktur Organisasi</Link>
-                <Link href="/profil#wilayah" className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">Data Wilayah</Link>
-              </div>
-            </div>
-            <Link href="/berita" className="px-3 py-2 hover:text-green-600 transition">Berita</Link>
-            <Link href="/layanan" className="px-3 py-2 hover:text-green-600 transition">Layanan</Link>
-            <Link href="/potensi" className="px-3 py-2 hover:text-green-600 transition">Potensi</Link>
-            <Link href="/galeri" className="px-3 py-2 hover:text-green-600 transition">Galeri</Link>
-            <Link href="/kontak" className="px-3 py-2 hover:text-green-600 transition">Kontak</Link>
+            {menus.length === 0 ? (
+              // Fallback menu when db is empty
+              <Link href="/" className="px-3 py-2 hover:text-green-600 transition">Beranda</Link>
+            ) : (
+              menus.map((menu) => (
+                menu.children && menu.children.length > 0 ? (
+                  <div key={menu.id} className="relative group dropdown">
+                    <button className="px-3 py-2 hover:text-green-600 flex items-center gap-1 cursor-pointer">
+                      {menu.nama} <i className="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div className="absolute left-0 mt-1 hidden group-hover:block bg-white border border-gray-200 shadow-lg rounded py-2 w-48 z-50">
+                      {menu.children.map((child: any) => (
+                        <Link key={child.id} href={child.link} className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 text-xs">
+                          {child.nama}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <Link key={menu.id} href={menu.link} className="px-3 py-2 hover:text-green-600 transition">
+                    {menu.nama}
+                  </Link>
+                )
+              ))
+            )}
           </nav>
         </div>
         
         {/* Mobile Nav */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 px-4 pb-4">
-            <Link href="/" className="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Beranda</Link>
-            <Link href="/profil" className="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Profil</Link>
-            <Link href="/berita" className="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Berita</Link>
-            <Link href="/layanan" className="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Layanan</Link>
-            <Link href="/potensi" className="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Potensi</Link>
-            <Link href="/galeri" className="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Galeri</Link>
-            <Link href="/kontak" className="block py-2 text-gray-700 font-semibold text-sm">Kontak</Link>
+            {menus.length === 0 ? (
+               <Link href="/" className="block py-2 text-gray-700 font-semibold text-sm border-b border-gray-100">Beranda</Link>
+            ) : (
+              menus.map((menu) => (
+                <div key={menu.id} className="border-b border-gray-100">
+                  {menu.children && menu.children.length > 0 ? (
+                    <div className="py-2">
+                      <span className="block text-gray-900 font-bold text-sm mb-2">{menu.nama}</span>
+                      <div className="pl-4 border-l-2 border-green-200 space-y-2">
+                        {menu.children.map((child: any) => (
+                          <Link key={child.id} href={child.link} className="block text-gray-600 hover:text-green-700 text-sm">
+                            {child.nama}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <Link href={menu.link} className="block py-2 text-gray-700 font-semibold text-sm">
+                      {menu.nama}
+                    </Link>
+                  )}
+                </div>
+              ))
+            )}
           </div>
         )}
       </header>
