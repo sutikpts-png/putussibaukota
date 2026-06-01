@@ -10,6 +10,7 @@ export default function AkunAdmin() {
     admin_username: '',
     admin_password: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     fetchAkun();
@@ -81,7 +82,23 @@ export default function AkunAdmin() {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">Password Admin</label>
-              <input type="text" name="admin_password" required value={formData.admin_password} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none" />
+              <div className="relative">
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  name="admin_password" 
+                  required 
+                  value={formData.admin_password} 
+                  onChange={handleChange} 
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none pr-10" 
+                />
+                <button 
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-red-600 focus:outline-none"
+                >
+                  <i className={`fas fa-eye${showPassword ? '-slash' : ''}`}></i>
+                </button>
+              </div>
               <p className="text-xs text-gray-500 mt-1">Disarankan menggunakan kombinasi yang kuat dan unik.</p>
             </div>
           </div>
