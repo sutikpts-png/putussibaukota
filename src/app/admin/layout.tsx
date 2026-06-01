@@ -10,6 +10,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isContentMenuOpen, setIsContentMenuOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -46,24 +47,41 @@ export default function AdminLayout({
           <Link href="/admin" className="block px-4 py-2 rounded hover:bg-green-800 transition">
             <i className="fas fa-home w-6"></i> Dashboard
           </Link>
-          <Link href="/admin/berita" className="block px-4 py-2 rounded hover:bg-green-800 transition">
-            <i className="fas fa-newspaper w-6"></i> Berita
-          </Link>
-          <Link href="/admin/layanan" className="block px-4 py-2 rounded hover:bg-green-800 transition">
-            <i className="fas fa-concierge-bell w-6"></i> Layanan
-          </Link>
-          <Link href="/admin/potensi" className="block px-4 py-2 rounded hover:bg-green-800 transition">
-            <i className="fas fa-leaf w-6"></i> Potensi
-          </Link>
-          <Link href="/admin/galeri" className="block px-4 py-2 rounded hover:bg-green-800 transition">
-            <i className="fas fa-images w-6"></i> Galeri
-          </Link>
-          <Link href="/admin/profil" className="block px-4 py-2 rounded hover:bg-green-800 transition">
-            <i className="fas fa-building w-6"></i> Profil
-          </Link>
-          <Link href="/admin/kontak" className="block px-4 py-2 rounded hover:bg-green-800 transition">
-            <i className="fas fa-address-book w-6"></i> Kontak
-          </Link>
+          
+          <div>
+            <button 
+              onClick={() => setIsContentMenuOpen(!isContentMenuOpen)}
+              className="w-full text-left flex items-center justify-between px-4 py-2 rounded hover:bg-green-800 transition focus:outline-none"
+            >
+              <div>
+                <i className="fas fa-edit w-6"></i> Content
+              </div>
+              <i className={`fas fa-chevron-${isContentMenuOpen ? 'up' : 'down'} text-xs`}></i>
+            </button>
+            
+            {isContentMenuOpen && (
+              <div className="mt-1 space-y-1 bg-green-950/30 py-2 rounded">
+                <Link href="/admin/berita" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
+                  <i className="fas fa-angle-right w-4"></i> Berita
+                </Link>
+                <Link href="/admin/layanan" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
+                  <i className="fas fa-angle-right w-4"></i> Layanan
+                </Link>
+                <Link href="/admin/potensi" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
+                  <i className="fas fa-angle-right w-4"></i> Potensi
+                </Link>
+                <Link href="/admin/galeri" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
+                  <i className="fas fa-angle-right w-4"></i> Galeri
+                </Link>
+                <Link href="/admin/profil" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
+                  <i className="fas fa-angle-right w-4"></i> Profil
+                </Link>
+                <Link href="/admin/kontak" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
+                  <i className="fas fa-angle-right w-4"></i> Kontak
+                </Link>
+              </div>
+            )}
+          </div>
           <Link href="/admin/menu" className="block px-4 py-2 rounded hover:bg-green-800 transition mt-4 bg-green-800/30">
             <i className="fas fa-bars w-6"></i> Menu Navigasi
           </Link>

@@ -10,6 +10,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Kelurahan Kedamin Hilir - Kecamatan Pakem, Sleman",
   description: "Portal resmi Kelurahan Kedamin Hilir",
+  icons: {
+    icon: '/icon.png?v=2',
+    shortcut: '/favicon.ico?v=2',
+  },
 };
 
 export default function RootLayout({
