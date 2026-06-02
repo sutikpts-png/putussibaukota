@@ -94,7 +94,7 @@ export default async function BeritaDetail({ params }: { params: any }) {
                 {latestBerita && latestBerita.length > 0 ? (
                   latestBerita.map((item: any) => (
                     <div key={item.id} className="flex gap-3 group">
-                      <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                      <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 relative">
                         {item.gambar_url ? (
                           <Image src={item.gambar_url} alt={item.judul} fill sizes="80px" className="object-cover group-hover:scale-110 transition duration-300" />
                         ) : (
