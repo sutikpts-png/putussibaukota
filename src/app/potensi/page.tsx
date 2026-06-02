@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function PotensiPage() {
   const { data: potensi } = await supabase
@@ -38,7 +39,7 @@ export default async function PotensiPage() {
                 <div className="w-full md:w-1/2">
                   <div className="rounded-2xl overflow-hidden shadow-lg h-64 md:h-80 relative">
                     {item.gambar_url ? (
-                      <img src={item.gambar_url} alt={item.nama_potensi} className="w-full h-full object-cover" />
+                      <Image src={item.gambar_url} alt={item.nama_potensi} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                     ) : (
                       <div className="w-full h-full bg-green-100 flex items-center justify-center">
                         <i className="fas fa-image text-6xl text-green-300"></i>

@@ -21,20 +21,41 @@ CREATE POLICY "Public profiles are viewable by everyone."
 ON public.produk_hukum FOR SELECT 
 USING ( true );
 
--- Kebijakan (Policy) agar admin (authenticated) bisa insert, update, delete
--- (Jika Anda memiliki auth, jika tidak, Anda bisa membuka akses publik penuh untuk sementara)
-CREATE POLICY "Enable insert for authenticated users only" 
+-- Kebijakan (Policy) agar siapa saja bisa insert, update, delete
+-- Karena panel admin saat ini tidak menggunakan Supabase Auth secara penuh
+CREATE POLICY "Enable insert for all" 
 ON public.produk_hukum FOR INSERT 
-WITH CHECK ( auth.role() = 'authenticated' );
+WITH CHECK ( true );
 
-CREATE POLICY "Enable update for authenticated users only" 
+CREATE POLICY "Enable update for all" 
 ON public.produk_hukum FOR UPDATE 
-USING ( auth.role() = 'authenticated' );
+USING ( true );
 
-CREATE POLICY "Enable delete for authenticated users only" 
+CREATE POLICY "Enable delete for all" 
 ON public.produk_hukum FOR DELETE 
-USING ( auth.role() = 'authenticated' );
+USING ( true );
 
 -- JANGAN LUPA: 
 -- Anda juga harus membuat BUCKET di menu Storage Supabase dengan nama: "dokumen"
 -- Dan pastikan bucket "dokumen" tersebut di set "Public" agar file PDF bisa didownload.
+
+-- ==========================================
+-- POLICIES UNTUK STORAGE BUCKET (DOKUMEN)
+-- ==========================================
+-- Jalankan ini agar Anda bisa mengunggah (insert) file ke bucket "dokumen"
+
+CREATE POLICY "Izinkan semua orang melihat dokumen" 
+ON storage.objects FOR SELECT 
+USING ( bucket_id = 'dokumen' );
+
+CREATE POLICY "Izinkan upload dokumen" 
+ON storage.objects FOR INSERT 
+WITH CHECK ( bucket_id = 'dokumen' );
+
+CREATE POLICY "Izinkan update dokumen" 
+ON storage.objects FOR UPDATE 
+USING ( bucket_id = 'dokumen' );
+
+CREATE POLICY "Izinkan hapus dokumen" 
+ON storage.objects FOR DELETE 
+USING ( bucket_id = 'dokumen' );

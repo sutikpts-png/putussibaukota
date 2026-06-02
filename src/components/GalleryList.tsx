@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function GalleryList({ items }: { items: any[] }) {
   const [selectedItem, setSelectedItem] = useState<any>(null);
@@ -33,7 +34,7 @@ export default function GalleryList({ items }: { items: any[] }) {
                 </div>
               </div>
             ) : (
-              <img src={item.gambar_url} alt={item.judul} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <Image src={item.gambar_url} alt={item.judul} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none">
               <span className="text-[10px] font-bold text-white bg-green-600 px-2 py-1 rounded w-max mb-1 uppercase">{item.kategori}</span>

@@ -1,15 +1,23 @@
 import Link from "next/link";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import GallerySlider from "@/components/GallerySlider";
 import HeroSlider from "@/components/HeroSlider";
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function Home() {
-  const { data: web } = await supabase.from('pengaturan_web').select('*').eq('id', 1).single();
-  const { data: latestBerita } = await supabase.from('berita').select('*').order('tanggal_publikasi', { ascending: false }).limit(3);
-  const { data: latestFoto } = await supabase.from('galeri').select('*').eq('kategori', 'Foto').order('created_at', { ascending: false }).limit(8);
-  const { data: latestVideo } = await supabase.from('galeri').select('*').eq('kategori', 'Video').order('created_at', { ascending: false }).limit(6);
+  const [
+    { data: web },
+    { data: latestBerita },
+    { data: latestFoto },
+    { data: latestVideo }
+  ] = await Promise.all([
+    supabase.from('pengaturan_web').select('*').eq('id', 1).single(),
+    supabase.from('berita').select('*').order('tanggal_publikasi', { ascending: false }).limit(3),
+    supabase.from('galeri').select('*').eq('kategori', 'Foto').order('created_at', { ascending: false }).limit(8),
+    supabase.from('galeri').select('*').eq('kategori', 'Video').order('created_at', { ascending: false }).limit(6)
+  ]);
 
   const heroTitle = web?.hero_title || 'Selamat Datang di<br/><span class="text-yellow-300">Kelurahan Kedamin Hilir</span>';
   const heroSubtitle = web?.hero_subtitle || 'Melayani masyarakat dengan tulus, transparan, dan profesional demi terwujudnya kelurahan yang maju, sejahtera, dan berdaya saing.';
@@ -101,7 +109,7 @@ export default async function Home() {
               <article key={item.id} className="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100 flex flex-col h-full">
                 <div className="h-48 news-img flex items-center justify-center relative overflow-hidden bg-gray-100">
                   {item.gambar_url ? (
-                    <img src={item.gambar_url} alt={item.judul} className="w-full h-full object-cover" />
+                    <Image src={item.gambar_url} alt={item.judul} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                   ) : (
                     <i className="fas fa-image text-6xl text-gray-300"></i>
                   )}

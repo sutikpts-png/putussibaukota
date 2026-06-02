@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function LayananPage() {
   const { data: layanan } = await supabase
@@ -37,7 +38,7 @@ export default async function LayananPage() {
               <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
                 <div className="w-12 h-12 bg-green-50 text-green-600 rounded-lg flex items-center justify-center mb-4">
                   {item.ikon_url ? (
-                    <img src={item.ikon_url} alt="icon" className="w-8 h-8 object-contain" />
+                    <Image src={item.ikon_url} alt="icon" width={32} height={32} className="object-contain" />
                   ) : (
                     <i className="fas fa-file-alt text-xl"></i>
                   )}

@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function ProfilPage() {
   const { data: profil } = await supabase
@@ -60,7 +61,7 @@ export default async function ProfilPage() {
               <div id="struktur" className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-24">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Struktur Organisasi</h3>
                 {profil.struktur_organisasi_url ? (
-                  <img src={profil.struktur_organisasi_url} alt="Struktur Organisasi" className="w-full rounded-lg shadow-sm" />
+                  <Image src={profil.struktur_organisasi_url} alt="Struktur Organisasi" width={800} height={1000} className="w-full h-auto rounded-lg shadow-sm" />
                 ) : (
                   <div className="bg-gray-100 h-40 rounded-lg flex items-center justify-center text-gray-400">
                     Belum ada struktur organisasi

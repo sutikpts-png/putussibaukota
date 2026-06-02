@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
@@ -40,7 +41,7 @@ export default function GallerySlider({ latestFoto, latestVideo }: { latestFoto:
                   className="relative group rounded-xl overflow-hidden shadow-sm aspect-square bg-gray-100 h-full cursor-pointer"
                   onClick={() => setSelectedItem(item)}
                 >
-                  <img src={item.gambar_url} alt={item.judul} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                  <Image src={item.gambar_url} alt={item.judul} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover group-hover:scale-110 transition duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
                     <p className="text-white text-sm font-semibold truncate">{item.judul}</p>
                   </div>

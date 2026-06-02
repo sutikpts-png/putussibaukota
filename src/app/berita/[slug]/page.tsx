@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function BeritaDetail({ params }: { params: any }) {
   const { slug } = await params;
@@ -63,7 +64,9 @@ export default async function BeritaDetail({ params }: { params: any }) {
           {/* MAIN CONTENT */}
           <article className="lg:w-2/3 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             {berita.gambar_url && (
-              <img src={berita.gambar_url} alt={berita.judul} className="w-full max-h-[500px] object-cover" />
+              <div className="w-full aspect-video relative">
+                <Image src={berita.gambar_url} alt={berita.judul} fill priority sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover" />
+              </div>
             )}
             <div className="p-8">
               {berita.konten.includes('<p>') || berita.konten.includes('<div>') ? (
@@ -93,7 +96,7 @@ export default async function BeritaDetail({ params }: { params: any }) {
                     <div key={item.id} className="flex gap-3 group">
                       <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                         {item.gambar_url ? (
-                          <img src={item.gambar_url} className="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
+                          <Image src={item.gambar_url} alt={item.judul} fill sizes="80px" className="object-cover group-hover:scale-110 transition duration-300" />
                         ) : (
                           <i className="fas fa-image text-2xl text-gray-300 w-full h-full flex items-center justify-center"></i>
                         )}

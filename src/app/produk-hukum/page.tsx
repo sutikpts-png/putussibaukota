@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
-export const revalidate = 0; // Disable static rendering for now to fetch fresh data
+export const revalidate = 60; // Regenerate every 60s
 
 export default async function ProdukHukumPage() {
   const { data: produk, error } = await supabase

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 
@@ -105,7 +106,9 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <div className="w-12 h-14 flex items-center justify-center">
               {web.logo_url ? (
-                <img src={web.logo_url} alt={`Logo ${web.nama_kelurahan}`} className="h-full w-auto object-contain drop-shadow-sm" />
+                <div className="relative w-full h-full">
+                  <Image src={web.logo_url} alt={`Logo ${web.nama_kelurahan}`} fill sizes="48px" className="object-contain drop-shadow-sm" />
+                </div>
               ) : (
                 <div className="w-12 h-12 bg-green-700 flex items-center justify-center rounded-full text-white font-bold text-[10px] text-center leading-none p-1 shadow">
                   LOGO
