@@ -46,7 +46,11 @@ export default function TambahMenu() {
     if (error) {
       alert('Gagal menambah menu: ' + error.message);
     } else {
-      router.push('/admin/menu');
+      if (formData.parent_id) {
+        router.push('/admin/menu/sub');
+      } else {
+        router.push('/admin/menu/main');
+      }
       router.refresh();
     }
   };
@@ -54,10 +58,12 @@ export default function TambahMenu() {
   return (
     <div className="max-w-2xl">
       <div className="flex items-center gap-3 mb-6">
-        <Link href="/admin/menu" className="text-gray-500 hover:text-green-700">
+        <Link href={isSubMenu ? "/admin/menu/sub" : "/admin/menu/main"} className="text-gray-500 hover:text-green-700">
           <i className="fas fa-arrow-left"></i>
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900">Tambah Menu Navigasi</h1>
+        <h1 className="text-2xl font-bold text-gray-900">
+          {isSubMenu ? 'Tambah Sub Menu' : 'Tambah Main Menu'}
+        </h1>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
