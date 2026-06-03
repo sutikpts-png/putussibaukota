@@ -73,9 +73,17 @@ export default function GalleryList({ items }: { items: any[] }) {
             >
               {isVideo(item) ? (
                 <div className="w-full h-full relative bg-black">
-                  <video src={item.gambar_url} className="w-full h-full object-cover opacity-80" />
+                  {item.gambar_url?.includes('youtube.com') || item.gambar_url?.includes('youtu.be') ? (
+                    <iframe 
+                      className="w-full h-full pointer-events-none" 
+                      src={item.gambar_url.includes('youtu.be') ? item.gambar_url.replace('youtu.be/', 'youtube.com/embed/') : item.gambar_url.replace('watch?v=', 'embed/')} 
+                      allowFullScreen>
+                    </iframe>
+                  ) : (
+                    <video src={item.gambar_url} className="w-full h-full object-cover opacity-80 pointer-events-none" />
+                  )}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white/30 backdrop-blur rounded-full flex items-center justify-center text-white">
+                    <div className="w-12 h-12 bg-white/30 backdrop-blur rounded-full flex items-center justify-center text-white group-hover:scale-110 transition">
                       <i className="fas fa-play"></i>
                     </div>
                   </div>
@@ -136,7 +144,16 @@ export default function GalleryList({ items }: { items: any[] }) {
           
           <div className="relative max-w-5xl w-full max-h-full flex flex-col items-center justify-center" onClick={(e) => e.stopPropagation()}>
             {isVideo(selectedItem) ? (
-              <video src={selectedItem.gambar_url} className="w-full max-h-[80vh] rounded-lg shadow-2xl bg-black" controls autoPlay playsInline />
+              selectedItem.gambar_url?.includes('youtube.com') || selectedItem.gambar_url?.includes('youtu.be') ? (
+                <iframe 
+                  className="w-full aspect-video rounded-lg shadow-2xl max-h-[80vh]" 
+                  src={(selectedItem.gambar_url.includes('youtu.be') ? selectedItem.gambar_url.replace('youtu.be/', 'youtube.com/embed/') : selectedItem.gambar_url.replace('watch?v=', 'embed/')) + (selectedItem.gambar_url.includes('?') ? '&autoplay=1' : '?autoplay=1')} 
+                  allow="autoplay; fullscreen"
+                  allowFullScreen>
+                </iframe>
+              ) : (
+                <video src={selectedItem.gambar_url} className="w-full max-h-[80vh] rounded-lg shadow-2xl bg-black" controls autoPlay playsInline />
+              )
             ) : (
               <img src={selectedItem.gambar_url} alt={selectedItem.judul} className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl" />
             )}

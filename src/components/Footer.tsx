@@ -33,9 +33,10 @@ export default async function Footer() {
     else if (userInput.includes('/embed') || userInput.includes('output=embed')) {
       gmapsIframe = userInput;
     }
-    // Jika salah (paste link biasa), gunakan alamat sebagai fallback embed
+    // Jika salah (paste link biasa), gunakan alamat umum sebagai fallback embed
     else {
-      gmapsIframe = `https://maps.google.com/maps?q=${encodeURIComponent(alamat)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+      const queryMap = `${kelurahan} ${kecKab.replace(' · ', ', ').replace(' · ', ', ')}`;
+      gmapsIframe = `https://maps.google.com/maps?q=${encodeURIComponent(queryMap)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
     }
   }
   

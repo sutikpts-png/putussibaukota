@@ -313,6 +313,7 @@ export default function PengaturanWeb() {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">Iframe URL Google Maps (Untuk Footer)</label>
+              <p className="text-xs text-gray-500 mb-2">Buka Google Maps &gt; Cari Lokasi &gt; Bagikan &gt; Sematkan Peta &gt; Salin HTML. Paste di sini.</p>
               <input type="text" name="gmaps_iframe" required value={formData.gmaps_iframe} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none font-mono text-sm" />
               <p className="text-xs text-gray-500 mt-1">Copy isi dari atribut src="..." saat Anda meng-embed Google Maps.</p>
             </div>

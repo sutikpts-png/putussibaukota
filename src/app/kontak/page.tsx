@@ -11,6 +11,30 @@ export default async function KontakPage() {
     .eq('id', 1)
     .single();
 
+  const kelurahan = web?.nama_kelurahan || 'Kedamin Hilir';
+  const kecKab = web?.nama_kecamatan_kabupaten || 'Kapuas Hulu';
+  const queryMap = `${kelurahan} ${kecKab}`;
+  let gmapsIframe = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.0!2d110.42!3d-7.65!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMzknMDAuMCJTIDExMMKwMjUnMTIuMCJF!5e0!3m2!1sid!2sid!4v1';
+  
+  if (web?.gmaps_iframe) {
+    const userInput = web.gmaps_iframe;
+    // Jika user mem-paste seluruh tag <iframe>
+    if (userInput.includes('<iframe') && userInput.includes('src="')) {
+      const match = userInput.match(/src="([^"]+)"/);
+      if (match && match[1]) {
+        gmapsIframe = match[1];
+      }
+    } 
+    // Jika user mem-paste URL embed yang benar
+    else if (userInput.includes('/embed') || userInput.includes('output=embed')) {
+      gmapsIframe = userInput;
+    }
+    // Jika salah (paste link biasa), gunakan query lokasi yang lebih umum agar tidak ditolak (X-Frame-Options)
+    else {
+      gmapsIframe = `https://maps.google.com/maps?q=${encodeURIComponent(queryMap)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+    }
+  }
+
   return (
     <>
       <section className="page-hero text-white py-12 px-4">
@@ -99,7 +123,7 @@ export default async function KontakPage() {
       {/* Peta */}
       <section className="h-96 w-full">
         <iframe
-          src={web?.gmaps_iframe || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.0!2d110.42!3d-7.65!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMzknMDAuMCJTIDExMMKwMjUnMTIuMCJF!5e0!3m2!1sid!2sid!4v1"}
+          src={gmapsIframe}
           width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
         ></iframe>
       </section>
