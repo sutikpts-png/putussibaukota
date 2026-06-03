@@ -45,43 +45,62 @@ export default function AdminGaleri() {
         ) : galeri.length === 0 ? (
           <div className="text-center text-gray-500 py-8">Belum ada media di galeri.</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {galeri.map((item) => (
-              <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden group relative">
-                <div className="relative cursor-pointer" onClick={() => setSelectedItem(item)}>
-                  {item.kategori === 'Video' || item.gambar_url.match(/\.(mp4|webm|ogg)$/i) ? (
-                    <div className="w-full h-40 relative bg-black">
-                      <video src={item.gambar_url} className="w-full h-full object-cover opacity-80" />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-10 h-10 bg-white/30 backdrop-blur rounded-full flex items-center justify-center text-white pointer-events-none">
-                          <i className="fas fa-play text-xs"></i>
-                        </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200 text-sm text-gray-600">
+                  <th className="p-4 font-semibold w-32">Foto dan Video</th>
+                  <th className="p-4 font-semibold">Judul</th>
+                  <th className="p-4 font-semibold">Tanggal Upload</th>
+                  <th className="p-4 font-semibold text-center w-24">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {galeri.map((item) => (
+                  <tr key={item.id} className="border-b border-gray-100 hover:bg-gray-50 transition">
+                    <td className="p-4">
+                      <div className="w-24 h-16 rounded overflow-hidden bg-gray-100 relative cursor-pointer group" onClick={() => setSelectedItem(item)}>
+                        {item.kategori === 'Video' || item.gambar_url?.match(/\.(mp4|webm|ogg)$/i) ? (
+                          <div className="w-full h-full relative bg-black">
+                            <video src={item.gambar_url} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition" />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <i className="fas fa-play text-white text-xs drop-shadow-md"></i>
+                            </div>
+                          </div>
+                        ) : (
+                          <img src={item.gambar_url} alt={item.judul} className="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
+                        )}
                       </div>
-                    </div>
-                  ) : (
-                    <img src={item.gambar_url} alt={item.judul} className="w-full h-40 object-cover hover:scale-105 transition-transform duration-300" />
-                  )}
-                </div>
-                <div className="p-3 bg-white relative z-10">
-                  <p className="text-xs font-bold text-green-700 mb-1">{item.kategori}</p>
-                  <p className="text-sm font-semibold text-gray-900 truncate" title={item.judul}>{item.judul}</p>
-                </div>
-                <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition">
-                  <Link 
-                    href={`/admin/galeri/edit/${item.id}`}
-                    className="bg-blue-500 text-white w-8 h-8 rounded-full shadow hover:bg-blue-600 flex items-center justify-center"
-                  >
-                    <i className="fas fa-edit text-xs"></i>
-                  </Link>
-                  <button 
-                    onClick={() => hapusGaleri(item.id)}
-                    className="bg-red-500 text-white w-8 h-8 rounded-full shadow hover:bg-red-600 flex items-center justify-center"
-                  >
-                    <i className="fas fa-trash text-xs"></i>
-                  </button>
-                </div>
-              </div>
-            ))}
+                    </td>
+                    <td className="p-4">
+                      <p className="font-semibold text-gray-900 text-sm line-clamp-2 mb-1">{item.judul}</p>
+                      <span className="text-[10px] font-bold text-green-700 uppercase bg-green-50 px-2 py-0.5 rounded border border-green-100">{item.kategori}</span>
+                    </td>
+                    <td className="p-4 text-sm text-gray-500">
+                      {new Date(item.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                    </td>
+                    <td className="p-4">
+                      <div className="flex gap-2 justify-center">
+                        <Link 
+                          href={`/admin/galeri/edit/${item.id}`}
+                          className="bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition shadow-sm"
+                          title="Edit"
+                        >
+                          <i className="fas fa-edit text-xs"></i>
+                        </Link>
+                        <button 
+                          onClick={() => hapusGaleri(item.id)}
+                          className="bg-red-50 text-red-600 hover:bg-red-600 hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition shadow-sm"
+                          title="Hapus"
+                        >
+                          <i className="fas fa-trash text-xs"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>
