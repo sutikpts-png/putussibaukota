@@ -2,6 +2,7 @@
 
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef } from 'react';
+import { supabase } from '@/lib/supabase';
 
 interface RichTextEditorProps {
   value: string;
@@ -31,12 +32,37 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
           ],
           toolbar: 'undo redo | blocks | ' +
             'bold italic forecolor | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'alignright alignjustify | bullist numlist outdent indent | image | ' +
             'removeformat | help',
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
           placeholder: placeholder || 'Mulai mengetik...',
           branding: true,
-          promotion: false
+          promotion: false,
+          images_upload_handler: async (blobInfo: any, progress: any) => {
+            try {
+              const file = blobInfo.blob();
+              const fileName = `editor_${Date.now()}_${blobInfo.filename()}`;
+              
+              const { data, error } = await supabase.storage
+                .from('gambar')
+                .upload(fileName, file, {
+                  cacheControl: '3600',
+                  upsert: false
+                });
+
+              if (error) {
+                return Promise.reject('Upload failed: ' + error.message);
+              }
+
+              const { data: { publicUrl } } = supabase.storage
+                .from('gambar')
+                .getPublicUrl(fileName);
+
+              return publicUrl;
+            } catch (err: any) {
+              return Promise.reject('Upload error: ' + err.message);
+            }
+          }
         }}
       />
     </div>
