@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "react-quill-new/dist/quill.snow.css";
 /* ===== GLOBAL STYLES ===== */
 html { scroll-behavior: smooth; }

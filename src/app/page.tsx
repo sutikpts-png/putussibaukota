@@ -11,12 +11,14 @@ export default async function Home() {
     { data: web },
     { data: latestBerita },
     { data: latestFoto },
-    { data: latestVideo }
+    { data: latestVideo },
+    { data: layananList }
   ] = await Promise.all([
     supabase.from('pengaturan_web').select('*').eq('id', 1).single(),
     supabase.from('berita').select('*').order('tanggal_publikasi', { ascending: false }).limit(3),
     supabase.from('galeri').select('*').eq('kategori', 'Foto').order('created_at', { ascending: false }).limit(8),
-    supabase.from('galeri').select('*').eq('kategori', 'Video').order('created_at', { ascending: false }).limit(6)
+    supabase.from('galeri').select('*').eq('kategori', 'Video').order('created_at', { ascending: false }).limit(6),
+    supabase.from('layanan').select('*').order('created_at', { ascending: true }).limit(4)
   ]);
 
   const heroTitle = web?.hero_title || 'Selamat Datang di<br/><span class="text-yellow-300">Kelurahan Kedamin Hilir</span>';
@@ -163,35 +165,25 @@ export default async function Home() {
           <div className="w-16 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {/* Card Layanan */}
-          <Link href="/layanan#ktp" className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center card-hover hover:shadow-md hover:border-green-200 group">
-            <div className="w-12 h-12 bg-green-50 text-green-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-green-600 group-hover:text-white transition">
-              <i className="fas fa-id-card text-xl"></i>
+          {(!layananList || layananList.length === 0) ? (
+            <div className="col-span-2 md:col-span-4 text-center py-8 text-gray-500">
+              Belum ada layanan tersedia.
             </div>
-            <h4 className="font-bold text-gray-800 text-sm">Surat KTP</h4>
-            <p className="text-xs text-gray-400 mt-1">Pengantar pembuatan KTP</p>
-          </Link>
-          <Link href="/layanan#kk" className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center card-hover hover:shadow-md hover:border-green-200 group">
-            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
-              <i className="fas fa-users text-xl"></i>
-            </div>
-            <h4 className="font-bold text-gray-800 text-sm">Kartu Keluarga</h4>
-            <p className="text-xs text-gray-400 mt-1">Pengantar perubahan KK</p>
-          </Link>
-          <Link href="/layanan#domisili" className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center card-hover hover:shadow-md hover:border-green-200 group">
-            <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-600 group-hover:text-white transition">
-              <i className="fas fa-house-user text-xl"></i>
-            </div>
-            <h4 className="font-bold text-gray-800 text-sm">Surat Domisili</h4>
-            <p className="text-xs text-gray-400 mt-1">Keterangan tempat tinggal</p>
-          </Link>
-          <Link href="/layanan#usaha" className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center card-hover hover:shadow-md hover:border-green-200 group">
-            <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-600 group-hover:text-white transition">
-              <i className="fas fa-store text-xl"></i>
-            </div>
-            <h4 className="font-bold text-gray-800 text-sm">Surat Usaha</h4>
-            <p className="text-xs text-gray-400 mt-1">Keterangan izin usaha</p>
-          </Link>
+          ) : (
+            layananList.map((item) => (
+              <Link key={item.id} href={`/layanan/${item.id}`} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center card-hover hover:shadow-md hover:border-green-200 group flex flex-col h-full">
+                <div className="w-12 h-12 bg-green-50 text-green-600 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-green-600 group-hover:text-white transition">
+                  {item.ikon_url ? (
+                    <Image src={item.ikon_url} alt="icon" width={32} height={32} className="object-contain" />
+                  ) : (
+                    <i className="fas fa-file-alt text-xl"></i>
+                  )}
+                </div>
+                <h4 className="font-bold text-gray-800 text-sm group-hover:text-green-700 transition">{item.nama_layanan}</h4>
+                <p className="text-xs text-gray-400 mt-1 line-clamp-2">{item.deskripsi}</p>
+              </Link>
+            ))
+          )}
         </div>
       </section>
 

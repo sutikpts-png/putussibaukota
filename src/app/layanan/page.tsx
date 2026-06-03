@@ -35,21 +35,20 @@ export default async function LayananPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {layananList.map(item => (
-              <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
-                <div className="w-12 h-12 bg-green-50 text-green-600 rounded-lg flex items-center justify-center mb-4">
+              <Link href={`/layanan/${item.id}`} key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 card-hover hover:shadow-md hover:border-green-200 transition group flex flex-col h-full">
+                <div className="w-12 h-12 bg-green-50 text-green-600 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-600 group-hover:text-white transition">
                   {item.ikon_url ? (
                     <Image src={item.ikon_url} alt="icon" width={32} height={32} className="object-contain" />
                   ) : (
                     <i className="fas fa-file-alt text-xl"></i>
                   )}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{item.nama_layanan}</h3>
-                <p className="text-sm text-gray-600 mb-4">{item.deskripsi}</p>
-                <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                  <h4 className="text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">Persyaratan:</h4>
-                  <div className="text-sm text-gray-600 prose prose-sm" dangerouslySetInnerHTML={{ __html: item.persyaratan || '-' }} />
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-700 transition">{item.nama_layanan}</h3>
+                <p className="text-sm text-gray-600 mb-4 flex-grow">{item.deskripsi}</p>
+                <div className="pt-4 border-t border-gray-100 flex items-center justify-between mt-auto">
+                  <span className="text-xs font-semibold text-green-600 group-hover:underline">Lihat Persyaratan →</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
