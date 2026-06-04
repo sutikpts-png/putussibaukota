@@ -1,12 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 
-export default function EditSlider({ params }: { params: { id: string } }) {
+export default function EditSlider() {
   const router = useRouter();
+  const params = useParams();
+  const id = params.id as string;
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [file, setFile] = useState<File | null>(null);
@@ -28,7 +30,7 @@ export default function EditSlider({ params }: { params: { id: string } }) {
     const { data, error } = await supabase
       .from('slider_banner')
       .select('*')
-      .eq('id', params.id)
+      .eq('id', id)
       .single();
       
     if (data) {
@@ -92,7 +94,7 @@ export default function EditSlider({ params }: { params: { id: string } }) {
           urutan: parseInt(formData.urutan.toString()),
           image_url: finalImageUrl
         })
-        .eq('id', params.id);
+        .eq('id', id);
 
       if (dbError) throw dbError;
 
