@@ -6,10 +6,11 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-async function checkLayanan() {
-  const { data, error } = await supabase.from('layanan').select('*');
-  console.log('Error:', error);
-  console.log('Data:', data);
-}
+async function checkTables() {
+  const { error: errHalaman } = await supabase.from('halaman').select('*').limit(1);
+  console.log('Halaman error:', errHalaman);
 
-checkLayanan();
+  const { error: errMenu } = await supabase.from('menu').select('*').limit(1);
+  console.log('Menu error:', errMenu);
+}
+checkTables();
