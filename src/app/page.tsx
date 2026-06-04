@@ -2,95 +2,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import GallerySlider from "@/components/GallerySlider";
-import HeroSlider from "@/components/HeroSlider";
-
+import HeroSection from "@/components/HeroSection";
 export const revalidate = 60;
 
 export default async function Home() {
   const [
     { data: web },
+    { data: sliders },
     { data: latestBerita },
     { data: latestFoto },
     { data: latestVideo },
     { data: layananList }
   ] = await Promise.all([
     supabase.from('pengaturan_web').select('*').eq('id', 1).single(),
+    supabase.from('slider_banner').select('*').eq('is_active', true).order('urutan', { ascending: true }),
     supabase.from('berita').select('*').order('tanggal_publikasi', { ascending: false }).limit(3),
     supabase.from('galeri').select('*').eq('kategori', 'Foto').order('created_at', { ascending: false }).limit(8),
     supabase.from('galeri').select('*').eq('kategori', 'Video').order('created_at', { ascending: false }).limit(6),
     supabase.from('layanan').select('*').order('created_at', { ascending: true }).limit(4)
   ]);
 
-  const heroTitle = web?.hero_title || 'Selamat Datang di<br/><span class="text-yellow-300">Kelurahan Kedamin Hilir</span>';
-  const heroSubtitle = web?.hero_subtitle || 'Melayani masyarakat dengan tulus, transparan, dan profesional demi terwujudnya kelurahan yang maju, sejahtera, dan berdaya saing.';
-
-  let heroBgArr = ['/assets/img/hero-bg.jpg'];
-  if (web?.hero_image_url) {
-    try {
-      const parsed = JSON.parse(web.hero_image_url);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        heroBgArr = parsed;
-      } else if (typeof parsed === 'string') {
-        heroBgArr = [parsed];
-      }
-    } catch (e) {
-      heroBgArr = [web.hero_image_url];
-    }
-  }
-
   return (
     <>
       {/* HERO SECTION */}
-      <section className="relative text-white py-20 px-4 overflow-hidden bg-green-900">
-        <div 
-          className="absolute top-0 left-0 w-full h-16 z-20 pointer-events-none"
-          style={{
-            background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.7) 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
-            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)'
-          }}
-        ></div>
-        <HeroSlider images={heroBgArr} />
-        <div className="absolute inset-0 bg-gradient-to-r from-green-900 via-green-900 to-teal-800 opacity-[0.65] z-0"></div>
-        <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
-          <div className="space-y-6 fade-in drop-shadow-md">
-            <span className="bg-yellow-400 text-yellow-900 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">Pemerintahan Kelurahan</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight drop-shadow-md" dangerouslySetInnerHTML={{ __html: heroTitle }}></h2>
-            <p className="text-green-100 text-base md:text-lg max-w-xl drop-shadow-md">{heroSubtitle}</p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/layanan" className="bg-yellow-400 hover:bg-yellow-300 text-yellow-900 font-bold px-6 py-3 rounded-lg shadow-lg transition transform hover:-translate-y-0.5">
-                <i className="fas fa-concierge-bell mr-2"></i>Layanan Warga
-              </Link>
-              <Link href="/profil" className="border border-white/40 hover:bg-white/10 text-white font-semibold px-6 py-3 rounded-lg transition">
-                <i className="fas fa-info-circle mr-2"></i>Profil Kelurahan
-              </Link>
-            </div>
-          </div>
-          {/* Statistik Singkat */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="stat-card rounded-xl p-5 text-center border border-white/20">
-              <i className="fas fa-users text-3xl text-yellow-300 mb-2"></i>
-              <div className="text-3xl font-extrabold text-white">{web?.stat_penduduk || '12.450'}</div>
-              <div className="text-xs text-green-200 mt-1">Jumlah Penduduk</div>
-            </div>
-            <div className="stat-card rounded-xl p-5 text-center border border-white/20">
-              <i className="fas fa-home text-3xl text-yellow-300 mb-2"></i>
-              <div className="text-3xl font-extrabold text-white">{web?.stat_kk || '3.820'}</div>
-              <div className="text-xs text-green-200 mt-1">Kepala Keluarga</div>
-            </div>
-            <div className="stat-card rounded-xl p-5 text-center border border-white/20">
-              <i className="fas fa-map-marked-alt text-3xl text-yellow-300 mb-2"></i>
-              <div className="text-3xl font-extrabold text-white">{web?.stat_dusun || '12'}</div>
-              <div className="text-xs text-green-200 mt-1">Dusun / RW</div>
-            </div>
-            <div className="stat-card rounded-xl p-5 text-center border border-white/20">
-              <i className="fas fa-road text-3xl text-yellow-300 mb-2"></i>
-              <div className="text-3xl font-extrabold text-white">{web?.stat_luas || '8,4 km²'}</div>
-              <div className="text-xs text-green-200 mt-1">Luas Wilayah</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection web={web} sliders={sliders || []} />
 
       {/* BERITA TERKINI */}
       <section className="max-w-7xl mx-auto px-4 py-16 bg-gray-50/50">
