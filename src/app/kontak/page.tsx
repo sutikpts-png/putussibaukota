@@ -49,73 +49,94 @@ export default async function KontakPage() {
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-4 py-16">
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-12">
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Info Kontak */}
-          <div className="space-y-8">
-            <div className="text-center mb-10">
-              <h3 className="text-2xl font-bold text-green-900 mb-4">Informasi Kontak</h3>
-              <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                Pemerintah Kelurahan Kedamin Hilir senantiasa terbuka untuk komunikasi dengan warga. Silakan hubungi kami melalui kontak di bawah ini atau kunjungi kantor kami pada jam kerja.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-map-marker-alt text-xl"></i>
+          <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-12">
+            <div className="space-y-8">
+              <div className="text-center mb-10">
+                <h3 className="text-2xl font-bold text-green-900 mb-4">Informasi Kontak</h3>
+                <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                  Pemerintah Kelurahan Kedamin Hilir senantiasa terbuka untuk komunikasi dengan warga. Silakan hubungi kami melalui kontak di bawah ini atau kunjungi kantor kami pada jam kerja.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i className="fas fa-map-marker-alt text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Alamat Kantor</h4>
+                    <p className="text-gray-600 text-sm mt-1">{web?.alamat || 'Jl. Kaliurang Km. 17, Kedamin Hilir, Pakem, Sleman 55582'}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-gray-900">Alamat Kantor</h4>
-                  <p className="text-gray-600 text-sm mt-1">{web?.alamat || 'Jl. Kaliurang Km. 17, Kedamin Hilir, Pakem, Sleman 55582'}</p>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i className="fas fa-phone-alt text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Telepon</h4>
+                    <p className="text-gray-600 text-sm mt-1">{web?.telepon || '(0274) 895123'}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i className="fas fa-envelope text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Email</h4>
+                    <p className="text-gray-600 text-sm mt-1">{web?.email || 'kedaminhilir@slemankab.go.id'}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i className="fas fa-clock text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Jam Layanan</h4>
+                    <p className="text-gray-600 text-sm mt-1">{web?.jam_operasional || 'Senin - Jumat: 08:00 - 15:00 WIB'}</p>
+                  </div>
                 </div>
               </div>
               
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-phone-alt text-xl"></i>
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-900">Telepon</h4>
-                  <p className="text-gray-600 text-sm mt-1">{web?.telepon || '(0274) 895123'}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-envelope text-xl"></i>
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-900">Email</h4>
-                  <p className="text-gray-600 text-sm mt-1">{web?.email || 'kedaminhilir@slemankab.go.id'}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-clock text-xl"></i>
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-900">Jam Layanan</h4>
-                  <p className="text-gray-600 text-sm mt-1">{web?.jam_operasional || 'Senin - Jumat: 08:00 - 15:00 WIB'}</p>
+              <div className="pt-10 border-t border-gray-100 mt-10 text-center">
+                <h4 className="font-bold text-gray-900 mb-4">Media Sosial</h4>
+                <div className="flex justify-center gap-4">
+                  <a href={web?.link_facebook || '#'} className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                    <i className="fab fa-facebook-f text-lg"></i>
+                  </a>
+                  <a href={web?.link_instagram || '#'} className="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center hover:bg-pink-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                    <i className="fab fa-instagram text-lg"></i>
+                  </a>
+                  <a href={web?.link_youtube || '#'} className="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                    <i className="fab fa-youtube text-lg"></i>
+                  </a>
                 </div>
               </div>
             </div>
-            
-            <div className="pt-10 border-t border-gray-100 mt-10 text-center">
-              <h4 className="font-bold text-gray-900 mb-4">Media Sosial</h4>
-              <div className="flex justify-center gap-4">
-                <a href={web?.link_facebook || '#'} className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
-                  <i className="fab fa-facebook-f text-lg"></i>
-                </a>
-                <a href={web?.link_instagram || '#'} className="w-12 h-12 bg-pink-600 text-white rounded-full flex items-center justify-center hover:bg-pink-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
-                  <i className="fab fa-instagram text-lg"></i>
-                </a>
-                <a href={web?.link_youtube || '#'} className="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
-                  <i className="fab fa-youtube text-lg"></i>
-                </a>
-              </div>
+          </div>
+
+          {/* LAPOR / Aduan */}
+          <div className="lg:col-span-1 bg-white rounded-2xl shadow-lg border border-gray-100 p-8 flex flex-col items-center justify-center text-center hover:border-red-200 hover:shadow-xl transition group">
+            <div className="w-20 h-20 bg-red-50 text-red-600 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
+              <i className="fas fa-bullhorn text-4xl"></i>
             </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-3">Lapor Aduan</h3>
+            <p className="text-gray-500 mb-8 text-sm leading-relaxed">
+              Laporkan keluhan, aspirasi, atau permintaan ke instansi berwenang.
+            </p>
+            <a 
+              href={web?.link_lapor || "https://www.lapor.go.id"} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow hover:bg-red-700 hover:shadow-lg transition transform hover:-translate-y-1 w-full"
+            >
+              Lapor Sekarang
+            </a>
           </div>
         </div>
       </section>

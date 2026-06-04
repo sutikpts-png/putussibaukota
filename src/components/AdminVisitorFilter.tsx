@@ -8,6 +8,7 @@ export default function AdminVisitorFilter() {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [data, setData] = useState<any[]>([]);
+  const [totalOverall, setTotalOverall] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,9 +24,14 @@ export default function AdminVisitorFilter() {
 
       if (error || !rawStats) {
         setData([]);
+        setTotalOverall(0);
         setLoading(false);
         return;
       }
+
+      // Hitung jumlah keseluruhan (semua waktu)
+      const total = rawStats.reduce((sum, row) => sum + row.jumlah, 0);
+      setTotalOverall(total);
 
       const grouped: Record<string, any> = {};
 
@@ -68,13 +74,24 @@ export default function AdminVisitorFilter() {
 
   // Helper untuk mendapatkan lebar progress bar (max 100%)
   const maxVisits = data.length > 0 ? Math.max(...data.map(d => d.jumlah)) : 1;
+  const currentTotal = data.reduce((sum, item) => sum + item.jumlah, 0);
 
   return (
     <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm mt-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h3 className="text-lg font-bold text-gray-800">Detail Laporan Pengunjung</h3>
-          <p className="text-xs text-gray-500">Lihat rincian data pengunjung website kelurahan.</p>
+          <p className="text-xs text-gray-500 mb-2">Lihat rincian data pengunjung website kelurahan.</p>
+          <div className="flex gap-2">
+            <span className="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-1 rounded-md">
+              Total Keseluruhan: {totalOverall.toLocaleString('id-ID')}
+            </span>
+            {(startDate || endDate) && (
+              <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-1 rounded-md">
+                Total Filter: {currentTotal.toLocaleString('id-ID')}
+              </span>
+            )}
+          </div>
         </div>
         
         <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
