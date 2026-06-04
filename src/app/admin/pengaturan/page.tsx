@@ -7,7 +7,6 @@ export default function PengaturanWeb() {
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [heroImages, setHeroImages] = useState<string[]>([]);
-  const [newHeroFiles, setNewHeroFiles] = useState<File[]>([]);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [tautanCepat, setTautanCepat] = useState<{judul: string, url: string}[]>([]);
   const [formData, setFormData] = useState({
@@ -93,24 +92,6 @@ export default function PengaturanWeb() {
     let finalLogoUrl = formData.logo_url;
     let finalHeroImages = [...heroImages];
 
-    // Upload New Hero Images
-    if (newHeroFiles.length > 0) {
-      for (const file of newHeroFiles) {
-        const fileExt = file.name.split('.').pop();
-        const fileName = `hero-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-        const { error: uploadError } = await supabase.storage.from('gambar').upload(fileName, file);
-
-        if (uploadError) {
-          alert('Gagal mengupload gambar hero: ' + uploadError.message);
-          setLoading(false);
-          return;
-        }
-
-        const { data } = supabase.storage.from('gambar').getPublicUrl(fileName);
-        finalHeroImages.push(data.publicUrl);
-      }
-    }
-
     // Upload Logo Image
     if (logoFile) {
       const fileExt = logoFile.name.split('.').pop();
@@ -142,7 +123,6 @@ export default function PengaturanWeb() {
       alert('Gagal menyimpan pengaturan: ' + error.message);
     } else {
       alert('Pengaturan berhasil disimpan!');
-      setNewHeroFiles([]);
       fetchPengaturan(); // Refresh data to show new image URL if changed
     }
   };
@@ -224,59 +204,7 @@ export default function PengaturanWeb() {
               <label className="block text-sm font-semibold text-gray-700 mb-1">Sub-judul Hero</label>
               <textarea name="hero_subtitle" required rows={2} value={formData.hero_subtitle} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"></textarea>
             </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Background Image Hero (Slider)</label>
-              
-              {/* Existing Images */}
-              {heroImages.length > 0 && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4 p-3 bg-gray-50 rounded border border-gray-100">
-                  {heroImages.map((img, idx) => (
-                    <div key={idx} className="relative group rounded overflow-hidden shadow-sm aspect-video">
-                      <img src={img} alt="Hero Preview" className="w-full h-full object-cover" />
-                      <button 
-                        type="button"
-                        onClick={() => setHeroImages(heroImages.filter((_, i) => i !== idx))}
-                        className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-md"
-                        title="Hapus Gambar"
-                      >
-                        <i className="fas fa-trash-alt text-xs"></i>
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* New Files Preview */}
-              {newHeroFiles.length > 0 && (
-                <div className="mb-4 p-3 bg-blue-50 border border-blue-100 rounded text-sm">
-                  <p className="font-semibold mb-2 text-blue-800"><i className="fas fa-file-upload mr-2"></i>Gambar baru yang akan ditambahkan:</p>
-                  <ul className="space-y-1">
-                    {newHeroFiles.map((file, idx) => (
-                       <li key={idx} className="flex justify-between items-center text-blue-900 bg-white px-3 py-1.5 rounded shadow-sm">
-                         <span className="truncate pr-4">{file.name}</span>
-                         <button type="button" className="text-red-500 hover:text-red-700 text-xs font-bold" onClick={() => setNewHeroFiles(newHeroFiles.filter((_, i) => i !== idx))}>
-                           Batal
-                         </button>
-                       </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <input 
-                type="file" 
-                accept="image/*" 
-                multiple 
-                onChange={(e) => { 
-                  if (e.target.files) {
-                    setNewHeroFiles([...newHeroFiles, ...Array.from(e.target.files)]);
-                  }
-                  e.target.value = '';
-                }} 
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" 
-              />
-              <p className="text-xs text-gray-500 mt-2"><i className="fas fa-info-circle mr-1"></i>Pilih beberapa gambar sekaligus untuk membuat efek slider yang berganti otomatis di halaman utama.</p>
-            </div>
+            {/* Background Image Hero dipindah ke menu Content -> Slider Banner */}
           </div>
         </div>
 
