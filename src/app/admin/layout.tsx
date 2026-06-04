@@ -83,9 +83,22 @@ export default function AdminLayout({
                 <Link href="/admin/kontak" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
                   <i className="fas fa-angle-right w-4"></i> Kontak
                 </Link>
-                <Link href="/admin/halaman" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
-                  <i className="fas fa-angle-right w-4"></i> Halaman (Page)
-                </Link>
+              </div>
+            )}
+          </div>
+          <div>
+            <button 
+              onClick={() => setIsNavigasiMenuOpen(!isNavigasiMenuOpen)}
+              className="w-full text-left flex items-center justify-between px-4 py-2 rounded hover:bg-green-800 transition focus:outline-none mt-4 bg-green-800/30"
+            >
+              <div>
+                <i className="fas fa-bars w-6"></i> Menu Navigasi
+              </div>
+              <i className={`fas fa-chevron-${isNavigasiMenuOpen ? 'up' : 'down'} text-xs`}></i>
+            </button>
+            
+            {isNavigasiMenuOpen && (
+              <div className="mt-1 space-y-1 bg-green-950/30 py-2 rounded">
                 <Link href="/admin/menu/main" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
                   <i className="fas fa-angle-right w-4"></i> Main Menu
                 </Link>
@@ -95,7 +108,9 @@ export default function AdminLayout({
               </div>
             )}
           </div>
-
+          <Link href="/admin/halaman" className="block px-4 py-2 rounded hover:bg-green-800 transition">
+            <i className="fas fa-file-alt w-6"></i> Halaman Web
+          </Link>
           <Link href="/admin/pengaturan" className="block px-4 py-2 rounded hover:bg-green-800 transition mt-4 bg-green-800/50">
             <i className="fas fa-cog w-6"></i> Pengaturan Web
           </Link>
