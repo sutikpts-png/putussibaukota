@@ -44,7 +44,7 @@ export default function PengaturanWeb() {
       .single();
     
     if (data) {
-      setFormData(data);
+      setFormData({ ...data, tema_warna: data.tema_warna || 'original' });
       
       // Parse hero images array
       if (data.hero_image_url) {
@@ -60,7 +60,7 @@ export default function PengaturanWeb() {
         }
       }
       
-      setFormData(data);
+      setFormData({ ...data, tema_warna: data.tema_warna || 'original' });
 
       if (data.tautan_cepat) {
         setTautanCepat(typeof data.tautan_cepat === 'string' ? JSON.parse(data.tautan_cepat) : data.tautan_cepat);
