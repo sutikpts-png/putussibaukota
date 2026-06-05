@@ -28,7 +28,8 @@ export default function PengaturanWeb() {
     stat_penduduk: '',
     stat_kk: '',
     stat_dusun: '',
-    stat_luas: ''
+    stat_luas: '',
+    tema_warna: 'original'
   });
 
   useEffect(() => {
@@ -155,6 +156,15 @@ export default function PengaturanWeb() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">Email</label>
               <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Tema Warna Website</label>
+              <select name="tema_warna" value={formData.tema_warna} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                <option value="original">Original (Hijau)</option>
+                <option value="maroon">Merah Marun Gradiasi</option>
+                <option value="navy">Biru Dongker Gradiasi</option>
+              </select>
+              <p className="text-xs text-gray-500 mt-1">Pilih tema warna utama yang akan diterapkan pada seluruh halaman website.</p>
             </div>
           </div>
           

@@ -5,6 +5,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PublicOnly from "@/components/PublicOnly";
+import { supabase } from "@/lib/supabase";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,17 +18,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export const revalidate = 0;
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { data: web } = await supabase.from('pengaturan_web').select('tema_warna').eq('id', 1).single();
+  const temaWarnaClass = web?.tema_warna ? `theme-${web.tema_warna}` : 'theme-original';
+
   return (
     <html lang="id">
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
-      <body className={`${inter.className} bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col`}>
+      <body className={`${inter.className} bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col ${temaWarnaClass}`}>
         <PublicOnly>
           <Navbar />
         </PublicOnly>

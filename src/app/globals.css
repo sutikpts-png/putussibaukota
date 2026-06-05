@@ -6,7 +6,7 @@ html { scroll-behavior: smooth; }
 
 /* Hero background */
 .hero-bg {
-  background: linear-gradient(135deg, #14532d 0%, #065f46 50%, #1e3a5f 100%);
+  background: linear-gradient(135deg, var(--theme-900, #14532d) 0%, var(--theme-800, #065f46) 50%, var(--theme-950, #1e3a5f) 100%);
 }
 
 /* Stat card glassmorphism */
@@ -62,12 +62,12 @@ html { scroll-behavior: smooth; }
 
 /* Page hero */
 .page-hero {
-  background: linear-gradient(135deg, #14532d 0%, #065f46 100%);
+  background: linear-gradient(135deg, var(--theme-900, #14532d) 0%, var(--theme-800, #065f46) 100%);
 }
 
 /* Table styles */
 .table-kelurahan th {
-  background-color: #14532d;
+  background-color: var(--theme-900, #14532d);
   color: white;
   padding: 10px 14px;
   text-align: left;
@@ -155,7 +155,7 @@ html { scroll-behavior: smooth; }
   right: 24px;
   width: 44px;
   height: 44px;
-  background: #15803d;
+  background: var(--theme-700, #15803d);
   color: white;
   border-radius: 50%;
   display: none;
@@ -166,7 +166,7 @@ html { scroll-behavior: smooth; }
   z-index: 999;
   transition: background 0.2s;
 }
-#scrollTop:hover { background: #166534; }
+#scrollTop:hover { background: var(--theme-800, #166534); }
 #scrollTop.visible { display: flex; }
 
 /* Print styles */
@@ -183,6 +183,46 @@ html { scroll-behavior: smooth; }
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-green-50: var(--theme-50, #f0fdf4);
+  --color-green-100: var(--theme-100, #dcfce7);
+  --color-green-200: var(--theme-200, #bbf7d0);
+  --color-green-300: var(--theme-300, #86efac);
+  --color-green-400: var(--theme-400, #4ade80);
+  --color-green-500: var(--theme-500, #22c55e);
+  --color-green-600: var(--theme-600, #16a34a);
+  --color-green-700: var(--theme-700, #15803d);
+  --color-green-800: var(--theme-800, #166534);
+  --color-green-900: var(--theme-900, #14532d);
+  --color-green-950: var(--theme-950, #052e16);
+}
+
+.theme-maroon {
+  --theme-50: #fff1f2;
+  --theme-100: #ffe4e6;
+  --theme-200: #fecdd3;
+  --theme-300: #fda4af;
+  --theme-400: #fb7185;
+  --theme-500: #f43f5e;
+  --theme-600: #e11d48;
+  --theme-700: #be123c;
+  --theme-800: #9f1239;
+  --theme-900: #881337;
+  --theme-950: #4c0519;
+}
+
+.theme-navy {
+  --theme-50: #eff6ff;
+  --theme-100: #dbeafe;
+  --theme-200: #bfdbfe;
+  --theme-300: #93c5fd;
+  --theme-400: #60a5fa;
+  --theme-500: #3b82f6;
+  --theme-600: #2563eb;
+  --theme-700: #1d4ed8;
+  --theme-800: #1e40af;
+  --theme-900: #1e3a8a;
+  --theme-950: #172554;
 }
 
 @media (prefers-color-scheme: dark) {
