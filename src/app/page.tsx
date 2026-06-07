@@ -12,16 +12,14 @@ export default async function Home() {
     { data: latestBerita },
     { data: latestFoto },
     { data: latestVideo },
-    { data: layananList },
-    { data: produkHukumList }
+    { data: layananList }
   ] = await Promise.all([
     supabase.from('pengaturan_web').select('*').eq('id', 1).single(),
     supabase.from('slider_banner').select('*').eq('is_active', true).order('urutan', { ascending: true }),
     supabase.from('berita').select('*').order('tanggal_publikasi', { ascending: false }).limit(3),
     supabase.from('galeri').select('*').eq('kategori', 'Foto').order('created_at', { ascending: false }).limit(8),
     supabase.from('galeri').select('*').eq('kategori', 'Video').order('created_at', { ascending: false }).limit(6),
-    supabase.from('layanan').select('*').order('created_at', { ascending: true }).limit(4),
-    supabase.from('produk_hukum').select('*').order('tanggal_publikasi', { ascending: false }).limit(5)
+    supabase.from('layanan').select('*').order('created_at', { ascending: true }).limit(4)
   ]);
 
   return (
@@ -121,49 +119,6 @@ export default async function Home() {
               </Link>
             ))
           )}
-        </div>
-      </section>
-
-      {/* PRODUK HUKUM TERBARU */}
-      <section className="max-w-7xl mx-auto px-4 py-16 bg-gray-50/50">
-        <div className="text-center max-w-xl mx-auto mb-12">
-          <h3 className="text-2xl font-bold text-green-900">Produk Hukum Terbaru</h3>
-          <p className="text-gray-500 text-sm mt-2">Arsip peraturan dan dokumen hukum kelurahan yang dapat diakses publik.</p>
-          <div className="w-16 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
-        </div>
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          {(!produkHukumList || produkHukumList.length === 0) ? (
-            <div className="p-8 text-center text-gray-400 italic">Belum ada produk hukum.</div>
-          ) : (
-            <div className="divide-y divide-gray-100">
-              {produkHukumList.map((item: any) => (
-                <div key={item.id} className="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-green-50/50 transition">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-red-50 text-red-500 rounded-xl flex items-center justify-center shrink-0">
-                      <i className="fas fa-file-pdf text-2xl"></i>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-900 text-sm md:text-base">{item.judul}</h4>
-                      <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-xs text-gray-500">
-                        <span className="flex items-center gap-1"><i className="fas fa-tag"></i> {item.kategori}</span>
-                        <span className="flex items-center gap-1"><i className="fas fa-hashtag"></i> {item.nomor_surat} / {item.tahun}</span>
-                      </div>
-                    </div>
-                  </div>
-                  {item.file_url && (
-                    <a href={item.file_url} target="_blank" rel="noopener noreferrer" className="shrink-0 px-4 py-2 bg-white border border-green-200 text-green-700 hover:bg-green-600 hover:text-white rounded-lg text-sm font-bold transition-colors text-center">
-                      <i className="fas fa-download mr-1"></i> Unduh PDF
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="text-center mt-10">
-          <Link href="/produk-hukum" className="inline-block px-6 py-3 bg-white border border-green-600 text-green-700 font-bold text-sm rounded-lg hover:bg-green-50 transition">
-            Lihat Semua Produk Hukum
-          </Link>
         </div>
       </section>
 
