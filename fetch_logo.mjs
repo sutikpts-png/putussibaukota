@@ -1,0 +1,1 @@
+import https from 'https'; import fs from 'fs'; const file = fs.createWriteStream('./public/logo-jdih.png'); https.get('https://jdihn.go.id/assets/images/logo_jdih.png', function(response) { response.pipe(file); });

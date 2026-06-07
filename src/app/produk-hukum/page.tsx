@@ -32,7 +32,7 @@ export default async function ProdukHukumPage() {
           
           <a href="https://jdih.kapuashulukab.go.id" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/10 hover:bg-white/20 px-6 py-4 rounded-2xl border border-white/20 transition-all group shrink-0 shadow-lg">
             <div className="w-16 h-16 relative bg-white p-2 rounded-xl flex items-center justify-center shadow-inner">
-              <img src="/logo-jdih.png" alt="Logo JDIH" className="w-full h-full object-contain" />
+              <img src="/logo-jdih.png?v=2" alt="Logo JDIH" className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="text-[10px] font-bold text-green-200 uppercase tracking-widest mb-1 group-hover:text-white transition-colors">Terintegrasi Dengan</span>
