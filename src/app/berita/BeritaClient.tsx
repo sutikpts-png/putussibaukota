@@ -98,7 +98,7 @@ export default function BeritaClient() {
                   <h4 className="font-bold text-gray-900 hover:text-green-700 transition text-sm leading-snug">
                     <Link href={`/berita/${item.slug || item.id}`}>{item.judul}</Link>
                   </h4>
-                  <p className="text-xs text-gray-500 line-clamp-3 flex-grow">{item.konten}</p>
+                  <p className="text-xs text-gray-500 line-clamp-3 flex-grow">{item.konten.replace(/<[^>]+>/g, '').replace(/&[a-zA-Z0-9#]+;/g, ' ')}</p>
                   <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400 mt-auto">
                     <span><i className="far fa-calendar mr-1"></i> {new Date(item.tanggal_publikasi).toLocaleDateString('id-ID')}</span>
                     <Link href={`/berita/${item.slug || item.id}`} className="text-green-600 font-semibold hover:underline">Baca →</Link>

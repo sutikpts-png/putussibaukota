@@ -72,7 +72,7 @@ export default async function BeritaDetail({ params }: { params: any }) {
               {berita.konten.includes('<p>') || berita.konten.includes('<div>') ? (
                 <div className="prose prose-green max-w-none text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: berita.konten }} />
               ) : (
-                <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">{berita.konten}</div>
+                <div className="prose max-w-none text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: berita.konten }}></div>
               )}
             </div>
             
