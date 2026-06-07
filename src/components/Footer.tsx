@@ -133,7 +133,7 @@ export default async function Footer() {
         </div>
         <div className="max-w-7xl mx-auto px-4 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2 text-center sm:text-left">
           <p>© {new Date().getFullYear()} Kelurahan {kelurahan}, {kecKab.replace(' · ', ', ').replace(' · ', ', ')}. All Rights Reserved.</p>
-          <p>Dikembangkan oleh Dinas Komunikasi, Informatika dan Statistik Kabupaten Kapuas Hulu</p>
+          <p>di Kembangkan Diskominfotik Kab. Kapuas Hulu</p>
         </div>
       </footer>
     </>
