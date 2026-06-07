@@ -82,8 +82,10 @@ export default function EditProfil() {
 
     if (result.error) {
       setMessage({ text: 'Gagal menyimpan profil: ' + result.error.message, type: 'error' });
+      alert('Gagal menyimpan profil!');
     } else {
       setMessage({ text: 'Profil berhasil disimpan!', type: 'success' });
+      alert('Data profil berhasil disimpan!');
       router.refresh();
     }
     setSaving(false);
@@ -168,7 +170,7 @@ export default function EditProfil() {
             <p className="text-xs text-gray-500 mt-2">Pilih gambar dari komputer Anda. Kosongkan jika tidak ingin mengubah gambar yang sudah ada.</p>
           </div>
 
-          <div className="pt-4 flex gap-4">
+          <div className="pt-4 flex items-center gap-4">
             <button 
               type="submit" 
               disabled={saving}
@@ -176,6 +178,11 @@ export default function EditProfil() {
             >
               {saving ? 'Menyimpan...' : 'Simpan Profil'}
             </button>
+            {message.text && (
+              <div className={`px-4 py-2 rounded-lg text-sm font-medium ${message.type === 'error' ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600'}`}>
+                {message.text}
+              </div>
+            )}
           </div>
         </form>
       </div>
