@@ -19,14 +19,27 @@ export default async function ProdukHukumPage() {
     <>
       {/* PAGE HERO */}
       <section className="page-hero text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-2 text-xs text-green-300 mb-3">
-            <Link href="/" className="hover:text-white">Beranda</Link>
-            <i className="fas fa-chevron-right text-[10px]"></i>
-            <span className="text-white">Produk Hukum</span>
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 text-xs text-green-300 mb-3">
+              <Link href="/" className="hover:text-white">Beranda</Link>
+              <i className="fas fa-chevron-right text-[10px]"></i>
+              <span className="text-white">Produk Hukum</span>
+            </div>
+            <h2 className="text-3xl font-extrabold">Produk Hukum</h2>
+            <p className="text-green-200 mt-2 text-sm">Arsip Peraturan, Keputusan, dan Surat Edaran Kelurahan Putussibau Kota.</p>
           </div>
-          <h2 className="text-3xl font-extrabold">Produk Hukum</h2>
-          <p className="text-green-200 mt-2 text-sm">Arsip Peraturan, Keputusan, dan Surat Edaran Kelurahan Putussibau Kota.</p>
+          
+          <a href="https://jdih.kapuashulukab.go.id" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/10 hover:bg-white/20 px-6 py-4 rounded-2xl border border-white/20 transition-all group shrink-0 shadow-lg">
+            <div className="w-16 h-16 relative bg-white p-2 rounded-xl flex items-center justify-center shadow-inner">
+              <img src="/logo-jdih.png" alt="Logo JDIH" className="w-full h-full object-contain" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold text-green-200 uppercase tracking-widest mb-1 group-hover:text-white transition-colors">Terintegrasi Dengan</span>
+              <span className="text-xl font-extrabold text-white">JDIH KAPUAS HULU</span>
+            </div>
+            <i className="fas fa-external-link-alt ml-2 text-white/50 group-hover:text-white/90 transition-colors"></i>
+          </a>
         </div>
       </section>
 
