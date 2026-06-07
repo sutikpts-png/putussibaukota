@@ -110,7 +110,9 @@ export default function Navbar() {
                   <Image src={web.logo_url} alt={`Logo ${web.nama_kelurahan}`} fill sizes="48px" className="object-contain drop-shadow-sm" />
                 </div>
               ) : (
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Lambang_Kapuas_Hulu.png" alt="Logo Kapuas Hulu" className="h-[48px] w-auto object-contain drop-shadow-sm" />
+                <div className="w-12 h-12 bg-green-700 flex items-center justify-center rounded-full text-white font-bold text-[10px] text-center leading-none p-1 shadow">
+                  LOGO
+                </div>
               )}
             </div>
             <div>
