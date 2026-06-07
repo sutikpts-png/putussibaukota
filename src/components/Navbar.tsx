@@ -55,6 +55,18 @@ export default function Navbar() {
           children: childMenus.filter(child => child.parent_id === parent.id).sort((a, b) => a.urutan - b.urutan)
         })).sort((a, b) => a.urutan - b.urutan);
 
+        // Ensure Produk Hukum is present in the menu
+        const hasProdukHukum = parentMenus.some(m => m.link === '/produk-hukum' || m.nama.toLowerCase() === 'produk hukum');
+        if (!hasProdukHukum) {
+          structuredMenus.push({
+            id: 'hardcoded-produk-hukum',
+            nama: 'Produk Hukum',
+            link: '/produk-hukum',
+            parent_id: null,
+            urutan: 99,
+          });
+        }
+
         setMenus(structuredMenus);
       }
     }
