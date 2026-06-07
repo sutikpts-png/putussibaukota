@@ -141,11 +141,12 @@ export default function EditProfil() {
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Data Batas Wilayah</label>
-            <textarea 
-              name="wilayah" required rows={3}
-              value={formData.wilayah} onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none" 
-            />
+            <div className="border border-gray-300 rounded-lg overflow-hidden">
+              <RichTextEditor 
+                value={formData.wilayah} 
+                onChange={(val) => setFormData({ ...formData, wilayah: val })}
+              />
+            </div>
           </div>
 
           <div>
