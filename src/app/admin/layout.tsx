@@ -86,9 +86,7 @@ export default function AdminLayout({
                 <Link href="/admin/kontak" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
                   <i className="fas fa-angle-right w-4"></i> Kontak
                 </Link>
-                <Link href="/admin/survey" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
-                  <i className="fas fa-angle-right w-4"></i> Survey Warga
-                </Link>
+
               </div>
             )}
           </div>
@@ -122,6 +120,9 @@ export default function AdminLayout({
           </Link>
           <Link href="/admin/akun" className="block px-4 py-2 rounded hover:bg-green-800 transition">
             <i className="fas fa-user-shield w-6"></i> Pengaturan Admin
+          </Link>
+          <Link href="/admin/survey" className="block px-4 py-2 rounded hover:bg-green-800 transition">
+            <i className="fas fa-clipboard-list w-6"></i> Survey Warga
           </Link>
         </nav>
         <div className="p-4 border-t border-green-800">

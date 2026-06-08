@@ -102,3 +102,17 @@ CREATE TABLE public.slider_banner (
     urutan INTEGER NOT NULL DEFAULT 0,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+-- Tabel Survey Kepuasan
+CREATE TABLE public.survey_kepuasan (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama VARCHAR(255) DEFAULT 'Anonim',
+    umur INTEGER NULL,
+    jenis_kelamin VARCHAR(50) DEFAULT 'Laki-laki',
+    jenis_layanan VARCHAR(255) NOT NULL,
+    kemudahan_prosedur VARCHAR(50) NOT NULL,
+    kecepatan_pelayanan VARCHAR(50) NOT NULL,
+    kesopanan_petugas VARCHAR(50) NOT NULL,
+    saran TEXT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
