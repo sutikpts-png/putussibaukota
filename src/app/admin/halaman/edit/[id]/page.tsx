@@ -29,8 +29,8 @@ export default function EditHalaman() {
 
   useEffect(() => {
     async function fetchData() {
-      if (params.id) {
-        const { data } = await supabase.from('halaman').select('*').eq('id', params.id).single();
+      if (id) {
+        const { data } = await supabase.from('halaman').select('*').eq('id', id).single();
         if (data) {
           setFormData({
             judul: data.judul,
@@ -42,7 +42,7 @@ export default function EditHalaman() {
       setFetching(false);
     }
     fetchData();
-  }, [params.id]);
+  }, [id]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -73,7 +73,7 @@ export default function EditHalaman() {
       .from('halaman')
       .select('id')
       .eq('slug', submitData.slug)
-      .neq('id', params.id)
+      .neq('id', id)
       .single();
     
     if (existing) {
@@ -82,7 +82,7 @@ export default function EditHalaman() {
       return;
     }
 
-    const { error } = await supabase.from('halaman').update(submitData).eq('id', params.id);
+    const { error } = await supabase.from('halaman').update(submitData).eq('id', id);
     setLoading(false);
 
     if (error) {

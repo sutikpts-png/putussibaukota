@@ -20,8 +20,8 @@ export default function EditLayanan() {
   });
 
   useEffect(() => {
-    if (params.id) fetchLayanan(params.id as string);
-  }, [params.id]);
+    if (id) fetchLayanan(id as string);
+  }, [id]);
 
   async function fetchLayanan(id: string) {
     const { data, error } = await supabase.from('layanan').select('*').eq('id', id).single();
@@ -61,7 +61,7 @@ export default function EditLayanan() {
       finalIkonUrl = data.publicUrl;
     }
 
-    const { error } = await supabase.from('layanan').update({ ...formData, ikon_url: finalIkonUrl }).eq('id', params.id);
+    const { error } = await supabase.from('layanan').update({ ...formData, ikon_url: finalIkonUrl }).eq('id', id);
     setLoading(false);
 
     if (error) {

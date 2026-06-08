@@ -19,8 +19,8 @@ export default function EditPotensi() {
   });
 
   useEffect(() => {
-    if (params.id) fetchPotensi(params.id as string);
-  }, [params.id]);
+    if (id) fetchPotensi(id as string);
+  }, [id]);
 
   async function fetchPotensi(id: string) {
     const { data, error } = await supabase.from('potensi').select('*').eq('id', id).single();
@@ -59,7 +59,7 @@ export default function EditPotensi() {
       finalGambarUrl = data.publicUrl;
     }
 
-    const { error } = await supabase.from('potensi').update({ ...formData, gambar_url: finalGambarUrl }).eq('id', params.id);
+    const { error } = await supabase.from('potensi').update({ ...formData, gambar_url: finalGambarUrl }).eq('id', id);
     setLoading(false);
 
     if (error) {

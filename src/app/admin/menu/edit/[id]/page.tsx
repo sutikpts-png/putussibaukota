@@ -25,14 +25,14 @@ export default function EditMenu() {
         .from('menu_navigasi')
         .select('*')
         .is('parent_id', null)
-        .neq('id', params.id) // Cannot be parent of itself
+        .neq('id', id) // Cannot be parent of itself
         .order('urutan', { ascending: true });
       
       if (parentsData) setParentMenus(parentsData);
 
       // Fetch the current menu data
-      if (params.id) {
-        const { data: menuData } = await supabase.from('menu_navigasi').select('*').eq('id', params.id).single();
+      if (id) {
+        const { data: menuData } = await supabase.from('menu_navigasi').select('*').eq('id', id).single();
         if (menuData) {
           setFormData({
             nama: menuData.nama,
@@ -45,7 +45,7 @@ export default function EditMenu() {
       setFetching(false);
     }
     fetchData();
-  }, [params.id]);
+  }, [id]);
 
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -62,7 +62,7 @@ export default function EditMenu() {
       urutan: parseInt(formData.urutan.toString())
     };
 
-    const { error } = await supabase.from('menu_navigasi').update(submitData).eq('id', params.id);
+    const { error } = await supabase.from('menu_navigasi').update(submitData).eq('id', id);
     setLoading(false);
 
     if (error) {

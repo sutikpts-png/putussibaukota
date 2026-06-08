@@ -20,8 +20,8 @@ export default function EditBerita() {
   });
 
   useEffect(() => {
-    if (params.id) fetchBerita(params.id as string);
-  }, [params.id]);
+    if (id) fetchBerita(id as string);
+  }, [id]);
 
   async function fetchBerita(id: string) {
     const { data, error } = await supabase.from('berita').select('*').eq('id', id).single();
@@ -62,7 +62,7 @@ export default function EditBerita() {
       finalGambarUrl = data.publicUrl;
     }
 
-    const { error } = await supabase.from('berita').update({ ...formData, slug, gambar_url: finalGambarUrl }).eq('id', params.id);
+    const { error } = await supabase.from('berita').update({ ...formData, slug, gambar_url: finalGambarUrl }).eq('id', id);
     setLoading(false);
 
     if (error) {

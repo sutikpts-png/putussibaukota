@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
-export default function EditProdukHukum({ params }: { params: { id: string } }) {
+export default function EditProdukHukum() {
   const router = useRouter();
+  const params = useParams();
+  const id = params.id as string;
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [file, setFile] = useState<File | null>(null);
@@ -19,14 +21,16 @@ export default function EditProdukHukum({ params }: { params: { id: string } }) 
   });
 
   useEffect(() => {
-    fetchData();
-  }, [params.id]);
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
 
   async function fetchData() {
     const { data, error } = await supabase
       .from('produk_hukum')
       .select('*')
-      .eq('id', params.id)
+      .eq('id', id)
       .single();
 
     if (data) {
@@ -80,7 +84,7 @@ export default function EditProdukHukum({ params }: { params: { id: string } }) 
     const { error } = await supabase
       .from('produk_hukum')
       .update({ ...formData, file_url: finalFileUrl })
-      .eq('id', params.id);
+      .eq('id', id);
 
     setLoading(false);
 

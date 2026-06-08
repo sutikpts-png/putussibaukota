@@ -19,8 +19,8 @@ export default function EditGaleri() {
   });
 
   useEffect(() => {
-    if (params.id) fetchGaleri(params.id as string);
-  }, [params.id]);
+    if (id) fetchGaleri(id as string);
+  }, [id]);
 
   async function fetchGaleri(id: string) {
     const { data, error } = await supabase.from('galeri').select('*').eq('id', id).single();
@@ -88,7 +88,7 @@ export default function EditGaleri() {
       return;
     }
 
-    const { error } = await supabase.from('galeri').update({ ...formData, gambar_url: finalGambarUrl }).eq('id', params.id);
+    const { error } = await supabase.from('galeri').update({ ...formData, gambar_url: finalGambarUrl }).eq('id', id);
     setLoading(false);
 
     if (error) {
