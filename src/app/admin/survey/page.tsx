@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function SurveyPage() {
   const [surveys, setSurveys] = useState<any[]>([]);
@@ -37,6 +38,25 @@ export default function SurveyPage() {
     }
   }
 
+  // Menyiapkan data untuk grafik
+  const chartData = [
+    { name: 'Sangat Baik', Prosedur: 0, Kecepatan: 0, Petugas: 0 },
+    { name: 'Baik', Prosedur: 0, Kecepatan: 0, Petugas: 0 },
+    { name: 'Cukup', Prosedur: 0, Kecepatan: 0, Petugas: 0 },
+    { name: 'Kurang', Prosedur: 0, Kecepatan: 0, Petugas: 0 },
+  ];
+
+  surveys.forEach(s => {
+    const p = chartData.find(d => d.name === s.kemudahan_prosedur);
+    if (p) p.Prosedur += 1;
+    
+    const k = chartData.find(d => d.name === s.kecepatan_pelayanan);
+    if (k) k.Kecepatan += 1;
+
+    const pt = chartData.find(d => d.name === s.kesopanan_petugas);
+    if (pt) pt.Petugas += 1;
+  });
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -48,6 +68,30 @@ export default function SurveyPage() {
           <i className="fas fa-sync-alt mr-2"></i> Refresh
         </button>
       </div>
+
+      {/* Statistik Grafik */}
+      {!loading && surveys.length > 0 && (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+          <h2 className="text-lg font-bold text-gray-800 mb-4"><i className="fas fa-chart-bar text-blue-600 mr-2"></i>Statistik Kepuasan Masyarakat</h2>
+          <div className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={chartData}
+                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
+                <XAxis dataKey="name" tick={{fill: '#6b7280', fontSize: 12}} tickLine={false} axisLine={{stroke: '#d1d5db'}} />
+                <YAxis tick={{fill: '#6b7280', fontSize: 12}} tickLine={false} axisLine={false} allowDecimals={false} />
+                <Tooltip cursor={{fill: '#f3f4f6'}} contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'}} />
+                <Legend iconType="circle" wrapperStyle={{paddingTop: '20px'}} />
+                <Bar dataKey="Prosedur" fill="#3b82f6" name="Kemudahan Prosedur" radius={[4, 4, 0, 0]} barSize={24} />
+                <Bar dataKey="Kecepatan" fill="#10b981" name="Kecepatan Pelayanan" radius={[4, 4, 0, 0]} barSize={24} />
+                <Bar dataKey="Petugas" fill="#f59e0b" name="Kesopanan Petugas" radius={[4, 4, 0, 0]} barSize={24} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      )}
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
