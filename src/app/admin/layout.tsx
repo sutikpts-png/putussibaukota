@@ -86,6 +86,9 @@ export default function AdminLayout({
                 <Link href="/admin/kontak" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
                   <i className="fas fa-angle-right w-4"></i> Kontak
                 </Link>
+                <Link href="/admin/survey" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
+                  <i className="fas fa-angle-right w-4"></i> Survey Warga
+                </Link>
               </div>
             )}
           </div>
