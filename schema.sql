@@ -116,3 +116,14 @@ CREATE TABLE public.survey_kepuasan (
     saran TEXT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+-- Tabel Agenda Kelurahan
+CREATE TABLE public.agenda (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    judul VARCHAR(255) NOT NULL,
+    tanggal DATE NOT NULL,
+    waktu VARCHAR(50) NULL,
+    lokasi VARCHAR(255) NULL,
+    keterangan TEXT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
