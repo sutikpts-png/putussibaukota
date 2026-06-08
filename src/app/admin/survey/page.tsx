@@ -2,11 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function SurveyPage() {
   const [surveys, setSurveys] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     fetchSurveys();
@@ -23,6 +27,7 @@ export default function SurveyPage() {
       console.error('Error fetching surveys:', error);
     } else {
       setSurveys(data || []);
+      setCurrentPage(1); // Reset to page 1 on fetch
     }
     setLoading(false);
   }
@@ -39,23 +44,64 @@ export default function SurveyPage() {
   }
 
   // Menyiapkan data untuk grafik
-  const chartData = [
-    { name: 'Sangat Baik', Prosedur: 0, Kecepatan: 0, Petugas: 0 },
-    { name: 'Baik', Prosedur: 0, Kecepatan: 0, Petugas: 0 },
-    { name: 'Cukup', Prosedur: 0, Kecepatan: 0, Petugas: 0 },
-    { name: 'Kurang', Prosedur: 0, Kecepatan: 0, Petugas: 0 },
+  const chartDataProsedur = [
+    { name: 'Sangat Baik', value: 0 },
+    { name: 'Baik', value: 0 },
+    { name: 'Cukup', value: 0 },
+    { name: 'Kurang', value: 0 },
+  ];
+  const chartDataKecepatan = [
+    { name: 'Sangat Baik', value: 0 },
+    { name: 'Baik', value: 0 },
+    { name: 'Cukup', value: 0 },
+    { name: 'Kurang', value: 0 },
+  ];
+  const chartDataPetugas = [
+    { name: 'Sangat Baik', value: 0 },
+    { name: 'Baik', value: 0 },
+    { name: 'Cukup', value: 0 },
+    { name: 'Kurang', value: 0 },
   ];
 
   surveys.forEach(s => {
-    const p = chartData.find(d => d.name === s.kemudahan_prosedur);
-    if (p) p.Prosedur += 1;
+    const p = chartDataProsedur.find(d => d.name === s.kemudahan_prosedur);
+    if (p) p.value += 1;
     
-    const k = chartData.find(d => d.name === s.kecepatan_pelayanan);
-    if (k) k.Kecepatan += 1;
+    const k = chartDataKecepatan.find(d => d.name === s.kecepatan_pelayanan);
+    if (k) k.value += 1;
 
-    const pt = chartData.find(d => d.name === s.kesopanan_petugas);
-    if (pt) pt.Petugas += 1;
+    const pt = chartDataPetugas.find(d => d.name === s.kesopanan_petugas);
+    if (pt) pt.value += 1;
   });
+
+  const COLORS: Record<string, string> = {
+    'Sangat Baik': '#10b981', // green
+    'Baik': '#3b82f6',        // blue
+    'Cukup': '#f59e0b',       // yellow
+    'Kurang': '#ef4444'       // red
+  };
+
+  const procData = chartDataProsedur.filter(d => d.value > 0);
+  const kecData = chartDataKecepatan.filter(d => d.value > 0);
+  const petData = chartDataPetugas.filter(d => d.value > 0);
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = surveys.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(surveys.length / itemsPerPage);
+
+  const renderCustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 border border-gray-200 shadow-lg rounded-lg text-sm">
+          <p className="font-semibold text-gray-800">{payload[0].name}</p>
+          <p className="text-gray-600">Jumlah: {payload[0].value} responden</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div>
@@ -69,31 +115,101 @@ export default function SurveyPage() {
         </button>
       </div>
 
-      {/* Statistik Grafik */}
+      {/* Statistik Grafik (Bentuk Lingkaran) */}
       {!loading && surveys.length > 0 && (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-          <h2 className="text-lg font-bold text-gray-800 mb-4"><i className="fas fa-chart-bar text-blue-600 mr-2"></i>Statistik Kepuasan Masyarakat</h2>
-          <div className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart
-                data={chartData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-                <XAxis dataKey="name" tick={{fill: '#6b7280', fontSize: 12}} tickLine={false} axisLine={{stroke: '#d1d5db'}} />
-                <YAxis tick={{fill: '#6b7280', fontSize: 12}} tickLine={false} axisLine={false} allowDecimals={false} />
-                <Tooltip cursor={{fill: '#f3f4f6'}} contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'}} />
-                <Legend iconType="circle" wrapperStyle={{paddingTop: '20px'}} />
-                <Bar dataKey="Prosedur" fill="#3b82f6" name="Kemudahan Prosedur" radius={[4, 4, 0, 0]} barSize={24} />
-                <Bar dataKey="Kecepatan" fill="#10b981" name="Kecepatan Pelayanan" radius={[4, 4, 0, 0]} barSize={24} />
-                <Bar dataKey="Petugas" fill="#f59e0b" name="Kesopanan Petugas" radius={[4, 4, 0, 0]} barSize={24} />
-              </BarChart>
-            </ResponsiveContainer>
+          <h2 className="text-lg font-bold text-gray-800 mb-6 border-b pb-2"><i className="fas fa-chart-pie text-blue-600 mr-2"></i>Statistik Kepuasan Masyarakat</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-64">
+            {/* Kemudahan Prosedur */}
+            <div className="flex flex-col items-center">
+              <h3 className="text-sm font-semibold text-gray-600 mb-2">Kemudahan Prosedur</h3>
+              <div className="w-full h-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={procData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={40}
+                      outerRadius={70}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {procData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[entry.name] || '#ccc'} />
+                      ))}
+                    </Pie>
+                    <Tooltip content={renderCustomTooltip} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* Kecepatan Pelayanan */}
+            <div className="flex flex-col items-center">
+              <h3 className="text-sm font-semibold text-gray-600 mb-2">Kecepatan Pelayanan</h3>
+              <div className="w-full h-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={kecData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={40}
+                      outerRadius={70}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {kecData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[entry.name] || '#ccc'} />
+                      ))}
+                    </Pie>
+                    <Tooltip content={renderCustomTooltip} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* Kesopanan Petugas */}
+            <div className="flex flex-col items-center">
+              <h3 className="text-sm font-semibold text-gray-600 mb-2">Kesopanan Petugas</h3>
+              <div className="w-full h-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={petData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={40}
+                      outerRadius={70}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {petData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[entry.name] || '#ccc'} />
+                      ))}
+                    </Pie>
+                    <Tooltip content={renderCustomTooltip} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
+          
+          {/* Custom Legend */}
+          <div className="flex flex-wrap justify-center gap-4 mt-4 pt-4 border-t border-gray-100">
+            {Object.keys(COLORS).map((key) => (
+              <div key={key} className="flex items-center text-xs text-gray-600 font-medium">
+                <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: COLORS[key] }}></div>
+                {key}
+              </div>
+            ))}
           </div>
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm text-gray-600">
             <thead className="bg-gray-50 text-gray-700 text-xs uppercase font-bold border-b border-gray-200">
@@ -121,7 +237,7 @@ export default function SurveyPage() {
                   </td>
                 </tr>
               ) : (
-                surveys.map((item) => (
+                currentItems.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50/50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="font-semibold text-gray-800">{new Date(item.created_at).toLocaleDateString('id-ID')}</div>
@@ -168,6 +284,31 @@ export default function SurveyPage() {
             </tbody>
           </table>
         </div>
+        
+        {/* Pagination Controls */}
+        {!loading && surveys.length > itemsPerPage && (
+          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between bg-gray-50">
+            <div className="text-sm text-gray-500">
+              Menampilkan <span className="font-semibold text-gray-700">{indexOfFirstItem + 1}</span> - <span className="font-semibold text-gray-700">{Math.min(indexOfLastItem, surveys.length)}</span> dari <span className="font-semibold text-gray-700">{surveys.length}</span> responden
+            </div>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1.5 border border-gray-300 rounded text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              >
+                Sebelumnya
+              </button>
+              <button 
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1.5 border border-gray-300 rounded text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              >
+                Berikutnya
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
