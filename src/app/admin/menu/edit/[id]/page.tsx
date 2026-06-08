@@ -8,6 +8,7 @@ import { supabase } from '@/lib/supabase';
 export default function EditMenu() {
   const router = useRouter();
   const params = useParams();
+  const id = params.id as string;
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [parentMenus, setParentMenus] = useState<any[]>([]);

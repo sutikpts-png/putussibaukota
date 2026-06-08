@@ -19,6 +19,7 @@ const generateSlug = (text: string) => {
 export default function EditHalaman() {
   const router = useRouter();
   const params = useParams();
+  const id = params.id as string;
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [formData, setFormData] = useState({
