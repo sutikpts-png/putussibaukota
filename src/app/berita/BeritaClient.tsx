@@ -30,7 +30,7 @@ export default function BeritaClient() {
     const from = (page - 1) * limit;
     const to = from + limit - 1;
 
-    query = query.order('tanggal_publikasi', { ascending: false }).range(from, to);
+    query = query.order('created_at', { ascending: false }).range(from, to);
 
     const { data, count, error } = await query;
 
@@ -100,7 +100,7 @@ export default function BeritaClient() {
                   </h4>
                   <p className="text-xs text-gray-500 line-clamp-3 flex-grow">{item.konten.replace(/<[^>]+>/g, '').replace(/&[a-zA-Z0-9#]+;/g, ' ')}</p>
                   <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400 mt-auto">
-                    <span><i className="far fa-calendar mr-1"></i> {new Date(item.tanggal_publikasi).toLocaleDateString('id-ID')}</span>
+                    <span><i className="far fa-calendar mr-1"></i> {new Date(item.created_at || item.tanggal_publikasi).toLocaleDateString('id-ID')}</span>
                     <Link href={`/berita/${item.slug || item.id}`} className="text-green-600 font-semibold hover:underline">Baca →</Link>
                   </div>
                 </div>
