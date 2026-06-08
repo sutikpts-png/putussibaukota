@@ -65,9 +65,7 @@ export default function AdminLayout({
                 <Link href="/admin/berita" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
                   <i className="fas fa-angle-right w-4"></i> Berita
                 </Link>
-                <Link href="/admin/agenda" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
-                  <i className="fas fa-angle-right w-4"></i> Agenda Pimpinan
-                </Link>
+
                 <Link href="/admin/slider" className="block px-4 py-2 pl-10 rounded hover:bg-green-800 transition text-sm">
                   <i className="fas fa-angle-right w-4"></i> Slider Banner
                 </Link>
@@ -123,6 +121,9 @@ export default function AdminLayout({
           </Link>
           <Link href="/admin/akun" className="block px-4 py-2 rounded hover:bg-green-800 transition">
             <i className="fas fa-user-shield w-6"></i> Pengaturan Admin
+          </Link>
+          <Link href="/admin/agenda" className="block px-4 py-2 rounded hover:bg-green-800 transition">
+            <i className="far fa-calendar-alt w-6"></i> Agenda Pimpinan
           </Link>
           <Link href="/admin/survey" className="block px-4 py-2 rounded hover:bg-green-800 transition">
             <i className="fas fa-clipboard-list w-6"></i> Survey Warga
