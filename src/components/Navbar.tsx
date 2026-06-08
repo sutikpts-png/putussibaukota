@@ -39,6 +39,9 @@ export default function Navbar() {
       const { data: webData } = await supabase.from('pengaturan_web').select('*').eq('id', 1).single();
       if (webData) setWeb(webData);
 
+      // Fetch profil for struktur organisasi url
+      const { data: profilData } = await supabase.from('profil').select('struktur_organisasi_url').single();
+
       // Fetch menu navigation
       const { data: menuData } = await supabase
         .from('menu_navigasi')
@@ -52,7 +55,12 @@ export default function Navbar() {
         
         const structuredMenus = parentMenus.map(parent => ({
           ...parent,
-          children: childMenus.filter(child => child.parent_id === parent.id).sort((a, b) => a.urutan - b.urutan)
+          children: childMenus.filter(child => child.parent_id === parent.id).map(child => {
+            if (child.link === '/profil#struktur' && profilData?.struktur_organisasi_url) {
+              return { ...child, link: profilData.struktur_organisasi_url };
+            }
+            return child;
+          }).sort((a, b) => a.urutan - b.urutan)
         })).sort((a, b) => a.urutan - b.urutan);
 
         // Ensure Produk Hukum is present in the menu
