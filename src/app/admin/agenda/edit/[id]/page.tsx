@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
-export default function EditAgenda({ params }: { params: { id: string } }) {
+export default function EditAgenda() {
   const router = useRouter();
+  const params = useParams();
+  const id = params.id as string;
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [file, setFile] = useState<File | null>(null);
@@ -21,14 +23,16 @@ export default function EditAgenda({ params }: { params: { id: string } }) {
   });
 
   useEffect(() => {
-    fetchAgenda();
-  }, [params.id]);
+    if (id) {
+      fetchAgenda();
+    }
+  }, [id]);
 
   async function fetchAgenda() {
     const { data, error } = await supabase
       .from('agenda')
       .select('*')
-      .eq('id', params.id)
+      .eq('id', id)
       .single();
 
     if (data) {
@@ -80,7 +84,7 @@ export default function EditAgenda({ params }: { params: { id: string } }) {
     const { error } = await supabase
       .from('agenda')
       .update(payload)
-      .eq('id', params.id);
+      .eq('id', id);
 
     setLoading(false);
 
