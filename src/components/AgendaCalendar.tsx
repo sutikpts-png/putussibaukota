@@ -190,7 +190,7 @@ export default function AgendaCalendar({ agendas }: { agendas: any[] }) {
                   </div>
 
                   <div className="mb-4">
-                    <h4 className="text-[11px] font-medium text-gray-500 mb-0.5">Yang Menghadiri :</h4>
+                    <h4 className="text-[11px] font-medium text-gray-500 mb-0.5">Keterangan :</h4>
                     {agenda.keterangan ? (
                       <div 
                         className="text-gray-800 text-xs whitespace-pre-wrap prose prose-sm max-w-none prose-p:my-0 prose-ul:my-0 prose-ol:my-0 prose-li:my-0 prose-li:p-0 leading-tight"
