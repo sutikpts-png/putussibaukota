@@ -8,13 +8,15 @@ import { supabase } from '@/lib/supabase';
 export default function TambahAgenda() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
   
   const [formData, setFormData] = useState({
     judul: '',
     tanggal: '',
     waktu: '',
     lokasi: '',
-    keterangan: ''
+    keterangan: '',
+    arsip_url: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -25,7 +27,28 @@ export default function TambahAgenda() {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.from('agenda').insert([formData]);
+    let finalArsipUrl = formData.arsip_url;
+
+    if (file) {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const { error: uploadError } = await supabase.storage
+        .from('arsip')
+        .upload(fileName, file);
+
+      if (uploadError) {
+        alert('Gagal mengupload arsip: ' + uploadError.message + '\n\nPastikan bucket "arsip" sudah dibuat dan public di Supabase!');
+        setLoading(false);
+        return;
+      }
+
+      const { data } = supabase.storage.from('arsip').getPublicUrl(fileName);
+      finalArsipUrl = data.publicUrl;
+    }
+
+    const payload = { ...formData, arsip_url: finalArsipUrl };
+
+    const { error } = await supabase.from('agenda').insert([payload]);
 
     setLoading(false);
 
@@ -99,6 +122,22 @@ export default function TambahAgenda() {
                 placeholder="Contoh: Aula Kelurahan Putussibau Kota"
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
               />
+            </div>
+
+            <div className="md:col-span-2 space-y-2">
+              <label className="text-sm font-bold text-slate-700">Upload Data Dukung / Arsip (Opsional)</label>
+              <input 
+                type="file"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    setFile(e.target.files[0]);
+                  } else {
+                    setFile(null);
+                  }
+                }}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100" 
+              />
+              <p className="text-xs text-slate-500">Unggah file PDF, Word, Excel, atau gambar sebagai arsip kegiatan.</p>
             </div>
 
             <div className="md:col-span-2 space-y-2">

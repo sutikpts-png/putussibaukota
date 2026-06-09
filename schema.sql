@@ -125,5 +125,6 @@ CREATE TABLE public.agenda (
     waktu VARCHAR(50) NULL,
     lokasi VARCHAR(255) NULL,
     keterangan TEXT NULL,
+    arsip_url TEXT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );

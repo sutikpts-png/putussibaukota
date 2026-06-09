@@ -3,7 +3,7 @@ import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import GallerySlider from "@/components/GallerySlider";
 import BeritaSlider from "@/components/BeritaSlider";
-import AgendaSlider from "@/components/AgendaSlider";
+import AgendaCalendar from "@/components/AgendaCalendar";
 import HeroSection from "@/components/HeroSection";
 import FloatingSurveyButton from "@/components/FloatingSurveyButton";
 export const revalidate = 60;
@@ -40,9 +40,9 @@ export default async function Home() {
           <div className="w-16 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="w-full">
           {/* Bagian Berita */}
-          <div className="lg:col-span-3">
+          <div>
             {(!latestBerita || latestBerita.length === 0) ? (
               <div className="text-center py-10 bg-white rounded-xl border border-gray-100 h-full flex flex-col items-center justify-center">
                 <i className="fas fa-newspaper text-3xl text-gray-300 mb-3"></i>
@@ -57,16 +57,6 @@ export default async function Home() {
               </Link>
             </div>
           </div>
-
-          {/* Bagian Agenda */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 sticky top-24">
-              <h4 className="font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4 flex items-center">
-                <i className="far fa-calendar-alt text-green-600 mr-2 text-lg"></i> Agenda Pimpinan
-              </h4>
-              <AgendaSlider agendaList={agendaList || []} />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -78,12 +68,27 @@ export default async function Home() {
           <div className="w-16 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
         </div>
         
-        <GallerySlider latestFoto={latestFoto || []} latestVideo={latestVideo || []} />
-        
-        <div className="text-center mt-10">
-          <Link href="/galeri" className="inline-block px-6 py-3 bg-white border border-green-600 text-green-700 font-bold text-sm rounded-lg hover:bg-green-50 transition">
-            Lihat Semua Galeri
-          </Link>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Bagian Galeri */}
+          <div className="lg:col-span-3">
+            <GallerySlider latestFoto={latestFoto || []} latestVideo={latestVideo || []} />
+            
+            <div className="text-center mt-10">
+              <Link href="/galeri" className="inline-block px-6 py-3 bg-white border border-green-600 text-green-700 font-bold text-sm rounded-lg hover:bg-green-50 transition">
+                Lihat Semua Galeri
+              </Link>
+            </div>
+          </div>
+
+          {/* Bagian Agenda */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 lg:p-5 sticky top-24">
+              <h4 className="font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4 flex items-center">
+                <i className="far fa-calendar-alt text-green-600 mr-2 text-lg"></i> Agenda Pimpinan
+              </h4>
+              <AgendaCalendar agendas={agendaList || []} />
+            </div>
+          </div>
         </div>
       </section>
 

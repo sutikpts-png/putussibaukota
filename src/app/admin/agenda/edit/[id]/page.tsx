@@ -9,13 +9,15 @@ export default function EditAgenda({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
+  const [file, setFile] = useState<File | null>(null);
   
   const [formData, setFormData] = useState({
     judul: '',
     tanggal: '',
     waktu: '',
     lokasi: '',
-    keterangan: ''
+    keterangan: '',
+    arsip_url: ''
   });
 
   useEffect(() => {
@@ -35,7 +37,8 @@ export default function EditAgenda({ params }: { params: { id: string } }) {
         tanggal: data.tanggal || '',
         waktu: data.waktu || '',
         lokasi: data.lokasi || '',
-        keterangan: data.keterangan || ''
+        keterangan: data.keterangan || '',
+        arsip_url: data.arsip_url || ''
       });
     } else if (error) {
       console.error(error);
@@ -53,9 +56,30 @@ export default function EditAgenda({ params }: { params: { id: string } }) {
     e.preventDefault();
     setLoading(true);
 
+    let finalArsipUrl = formData.arsip_url;
+
+    if (file) {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const { error: uploadError } = await supabase.storage
+        .from('arsip')
+        .upload(fileName, file);
+
+      if (uploadError) {
+        alert('Gagal mengupload arsip: ' + uploadError.message);
+        setLoading(false);
+        return;
+      }
+
+      const { data } = supabase.storage.from('arsip').getPublicUrl(fileName);
+      finalArsipUrl = data.publicUrl;
+    }
+
+    const payload = { ...formData, arsip_url: finalArsipUrl };
+
     const { error } = await supabase
       .from('agenda')
-      .update(formData)
+      .update(payload)
       .eq('id', params.id);
 
     setLoading(false);
@@ -134,6 +158,33 @@ export default function EditAgenda({ params }: { params: { id: string } }) {
                 placeholder="Contoh: Aula Kelurahan Putussibau Kota"
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
               />
+            </div>
+
+            <div className="md:col-span-2 space-y-2">
+              <label className="text-sm font-bold text-slate-700">Upload Data Dukung / Arsip (Opsional)</label>
+              
+              {formData.arsip_url && (
+                <div className="mb-2 p-3 bg-blue-50 border border-blue-100 rounded-lg flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-blue-700">
+                    <i className="fas fa-file-alt"></i>
+                    <span className="font-medium truncate max-w-[200px] md:max-w-md">Arsip saat ini: {formData.arsip_url.split('/').pop()}</span>
+                  </div>
+                  <a href={formData.arsip_url} target="_blank" rel="noopener noreferrer" className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition">Lihat File</a>
+                </div>
+              )}
+
+              <input 
+                type="file"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    setFile(e.target.files[0]);
+                  } else {
+                    setFile(null);
+                  }
+                }}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100" 
+              />
+              <p className="text-xs text-slate-500">Unggah file PDF, Word, Excel, atau gambar baru untuk mengganti arsip yang lama.</p>
             </div>
 
             <div className="md:col-span-2 space-y-2">
