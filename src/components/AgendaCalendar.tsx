@@ -191,7 +191,14 @@ export default function AgendaCalendar({ agendas }: { agendas: any[] }) {
 
                   <div className="mb-4">
                     <h4 className="text-[11px] font-medium text-gray-500 mb-0.5">Yang Menghadiri :</h4>
-                    <p className="text-gray-800 text-xs whitespace-pre-wrap leading-relaxed">{agenda.keterangan || '-'}</p>
+                    {agenda.keterangan ? (
+                      <div 
+                        className="text-gray-800 text-xs whitespace-pre-wrap leading-relaxed prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-ol:my-1"
+                        dangerouslySetInnerHTML={{ __html: agenda.keterangan }}
+                      />
+                    ) : (
+                      <p className="text-gray-800 text-xs whitespace-pre-wrap leading-relaxed">-</p>
+                    )}
                   </div>
 
                   {agenda.arsip_url && (

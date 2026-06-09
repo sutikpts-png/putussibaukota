@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import RichTextEditor from '@/components/RichTextEditor';
 
 export default function TambahAgenda() {
   const router = useRouter();
@@ -142,14 +143,11 @@ export default function TambahAgenda() {
 
             <div className="md:col-span-2 space-y-2">
               <label className="text-sm font-bold text-slate-700">Keterangan Tambahan</label>
-              <textarea 
-                name="keterangan" 
-                rows={4}
+              <RichTextEditor 
                 value={formData.keterangan} 
-                onChange={handleChange}
+                onChange={(val) => setFormData({ ...formData, keterangan: val })} 
                 placeholder="Informasi tambahan mengenai agenda..."
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none resize-none"
-              ></textarea>
+              />
             </div>
           </div>
 
