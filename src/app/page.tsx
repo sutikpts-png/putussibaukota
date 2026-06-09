@@ -35,7 +35,7 @@ export default async function Home() {
       {/* BERITA & AGENDA */}
       <section className="max-w-7xl mx-auto px-4 py-16 bg-gray-50/50">
         <div className="text-center max-w-xl mx-auto mb-12">
-          <h3 className="text-2xl font-bold text-green-900">Informasi & Agenda</h3>
+          <h3 className="text-2xl font-bold text-[#800000]">Berita dan Informasi</h3>
           <p className="text-gray-500 text-sm mt-2">Cepat, Akurat, dan Terpercaya dalam Menyampaikan Informasi</p>
           <div className="w-16 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
         </div>
