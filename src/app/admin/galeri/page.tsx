@@ -8,6 +8,7 @@ export default function AdminGaleri() {
   const [galeri, setGaleri] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState<'Foto' | 'Video'>('Foto');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -32,23 +33,39 @@ export default function AdminGaleri() {
     }
   }
 
-  const totalPages = Math.ceil(galeri.length / itemsPerPage);
-  const currentItems = galeri.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const filteredGaleri = galeri.filter(item => item.kategori === activeTab);
+  const totalPages = Math.ceil(filteredGaleri.length / itemsPerPage);
+  const currentItems = filteredGaleri.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Kelola Galeri</h1>
-        <Link href="/admin/galeri/tambah" className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+        <Link href="/admin/galeri/tambah" className="bg-[#b31237] hover:bg-[#8f0e2c] text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
           <i className="fas fa-plus mr-2"></i> Tambah Media
         </Link>
+      </div>
+
+      <div className="flex justify-center gap-4 mb-6">
+        <button 
+          onClick={() => { setActiveTab('Foto'); setCurrentPage(1); }}
+          className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all ${activeTab === 'Foto' ? 'bg-[#da1b4b] text-white shadow-md' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+        >
+          <i className="fas fa-image"></i> Galeri Foto
+        </button>
+        <button 
+          onClick={() => { setActiveTab('Video'); setCurrentPage(1); }}
+          className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all ${activeTab === 'Video' ? 'bg-[#da1b4b] text-white shadow-md' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+        >
+          <i className="fas fa-play-circle"></i> Galeri Video
+        </button>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         {loading ? (
           <div className="text-center text-gray-500 py-8">Memuat data...</div>
-        ) : galeri.length === 0 ? (
-          <div className="text-center text-gray-500 py-8">Belum ada media di galeri.</div>
+        ) : filteredGaleri.length === 0 ? (
+          <div className="text-center text-gray-500 py-8">Belum ada {activeTab.toLowerCase()} di galeri.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[600px]">
@@ -110,10 +127,10 @@ export default function AdminGaleri() {
         )}
 
         {/* Pagination */}
-        {totalPages > 1 && !loading && galeri.length > 0 && (
+        {totalPages > 1 && !loading && filteredGaleri.length > 0 && (
           <div className="flex justify-between items-center mt-6">
             <div className="text-sm text-gray-500">
-              Menampilkan {((currentPage - 1) * itemsPerPage) + 1} - {Math.min(currentPage * itemsPerPage, galeri.length)} dari {galeri.length} media
+              Menampilkan {((currentPage - 1) * itemsPerPage) + 1} - {Math.min(currentPage * itemsPerPage, filteredGaleri.length)} dari {filteredGaleri.length} {activeTab.toLowerCase()}
             </div>
             <div className="flex gap-1">
               <button 
