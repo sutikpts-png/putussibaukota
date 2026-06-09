@@ -77,7 +77,14 @@ export default function AdminAgenda() {
               <tbody className="divide-y divide-slate-100">
                 {agendas.map((item) => (
                   <tr key={item.id} className="bg-white hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4 font-bold text-slate-900">{item.judul}</td>
+                    <td className="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                      {item.arsip_url && (
+                        <a href={item.arsip_url} target="_blank" rel="noopener noreferrer" title="Lihat Arsip" className="text-blue-500 hover:text-blue-700">
+                          <i className="fas fa-file-alt"></i>
+                        </a>
+                      )}
+                      {item.judul}
+                    </td>
                     <td className="px-6 py-4 font-medium text-slate-500">
                       {new Date(item.tanggal).toLocaleDateString('id-ID', {
                         weekday: 'long',
