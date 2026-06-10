@@ -6,7 +6,7 @@ import BeritaSlider from "@/components/BeritaSlider";
 import AgendaCalendar from "@/components/AgendaCalendar";
 import HeroSection from "@/components/HeroSection";
 import FloatingSurveyButton from "@/components/FloatingSurveyButton";
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function Home() {
   const [
@@ -63,7 +63,7 @@ export default async function Home() {
       {/* GALERI */}
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center max-w-xl mx-auto mb-12">
-          <h3 className="text-2xl font-bold text-green-900">Galeri Kelurahan</h3>
+          <h3 className="text-2xl font-bold text-green-900">Galeri dan Agenda Pimpinan</h3>
           <p className="text-gray-500 text-sm mt-2">Dokumentasi kegiatan dan potensi Kelurahan Putussibau Kota.</p>
           <div className="w-16 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
         </div>

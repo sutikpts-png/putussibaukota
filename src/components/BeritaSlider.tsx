@@ -3,13 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
 export default function BeritaSlider({ latestBerita }: { latestBerita: any[] }) {
   if (!latestBerita || latestBerita.length === 0) {
     return (
@@ -21,22 +14,9 @@ export default function BeritaSlider({ latestBerita }: { latestBerita: any[] }) 
   }
 
   return (
-    <Swiper
-      modules={[Autoplay, Navigation, Pagination]}
-      spaceBetween={24}
-      slidesPerView={1}
-      breakpoints={{
-        640: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-      }}
-      autoplay={{ delay: 3000, disableOnInteraction: false }}
-      loop={true}
-      navigation
-      pagination={{ clickable: true }}
-      className="pb-12 h-full swiper-berita"
-    >
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {latestBerita.map((item) => (
-        <SwiperSlide key={item.id} className="h-auto">
+        <div key={item.id} className="h-full">
           <article className="bg-white rounded-xl shadow-sm overflow-hidden card-hover hover:shadow-md border border-gray-100 flex flex-col h-full">
             <div className="h-48 news-img flex items-center justify-center relative overflow-hidden bg-gray-100">
               {item.gambar_url ? (
@@ -59,8 +39,8 @@ export default function BeritaSlider({ latestBerita }: { latestBerita: any[] }) 
               </div>
             </div>
           </article>
-        </SwiperSlide>
+        </div>
       ))}
-    </Swiper>
+    </div>
   );
 }

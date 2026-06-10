@@ -31,6 +31,7 @@ export default function GallerySlider({ latestFoto, latestVideo }: { latestFoto:
               1024: { slidesPerView: 4 },
             }}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
+            loop={latestFoto.length > 1}
             navigation
             pagination={{ clickable: true }}
             className="pb-12"
@@ -67,6 +68,7 @@ export default function GallerySlider({ latestFoto, latestVideo }: { latestFoto:
               768: { slidesPerView: 2 },
             }}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
+            loop={latestVideo.length > 1}
             navigation
             pagination={{ clickable: true }}
             className="pb-12"
