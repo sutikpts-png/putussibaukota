@@ -12,6 +12,10 @@ import 'swiper/css/pagination';
 export default function GallerySlider({ latestFoto, latestVideo }: { latestFoto: any[], latestVideo: any[] }) {
   const [selectedItem, setSelectedItem] = useState<any>(null);
 
+  // Duplicate items to ensure Swiper can loop seamlessly even if there are few items
+  const displayFoto = latestFoto?.length > 0 ? [...latestFoto, ...latestFoto, ...latestFoto] : [];
+  const displayVideo = latestVideo?.length > 0 ? [...latestVideo, ...latestVideo, ...latestVideo] : [];
+
   return (
     <>
       <div className="mb-12">
@@ -31,13 +35,13 @@ export default function GallerySlider({ latestFoto, latestVideo }: { latestFoto:
               1024: { slidesPerView: 4 },
             }}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={latestFoto.length > 1}
+            loop={true}
             navigation
             pagination={{ clickable: true }}
             className="pb-12"
           >
-            {latestFoto.map((item) => (
-              <SwiperSlide key={item.id}>
+            {displayFoto.map((item, index) => (
+              <SwiperSlide key={`${item.id}-${index}`}>
                 <div 
                   className="relative group rounded-xl overflow-hidden shadow-sm aspect-square bg-gray-100 h-full cursor-pointer"
                   onClick={() => setSelectedItem(item)}
@@ -68,13 +72,13 @@ export default function GallerySlider({ latestFoto, latestVideo }: { latestFoto:
               768: { slidesPerView: 2 },
             }}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
-            loop={latestVideo.length > 1}
+            loop={true}
             navigation
             pagination={{ clickable: true }}
             className="pb-12"
           >
-            {latestVideo.map((item) => (
-              <SwiperSlide key={item.id} className="h-auto">
+            {displayVideo.map((item, index) => (
+              <SwiperSlide key={`${item.id}-${index}`} className="h-auto">
                 <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white p-2 h-full flex flex-col cursor-pointer group" onClick={() => setSelectedItem(item)}>
                   <div className="aspect-video bg-black rounded-lg overflow-hidden flex-shrink-0 relative">
                     {item.gambar_url.includes('youtube.com') || item.gambar_url.includes('youtu.be') ? (

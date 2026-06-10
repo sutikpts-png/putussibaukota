@@ -20,7 +20,7 @@ export default async function Home() {
   ] = await Promise.all([
     supabase.from('pengaturan_web').select('*').eq('id', 1).single(),
     supabase.from('slider_banner').select('*').eq('is_active', true).order('urutan', { ascending: true }),
-    supabase.from('berita').select('*').order('created_at', { ascending: false }).limit(6),
+    supabase.from('berita').select('*').order('created_at', { ascending: false }).limit(3),
     supabase.from('agenda').select('*').gte('tanggal', new Date().toISOString().split('T')[0]).order('tanggal', { ascending: true }).limit(20),
     supabase.from('galeri').select('*').eq('kategori', 'Foto').order('created_at', { ascending: false }).limit(8),
     supabase.from('galeri').select('*').eq('kategori', 'Video').order('created_at', { ascending: false }).limit(6),
