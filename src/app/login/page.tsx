@@ -76,9 +76,7 @@ export default function LoginPage() {
       <div className="flex-grow flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="bg-green-900 p-6 text-center flex flex-col items-center">
-            <div className="w-20 h-20 bg-white rounded-full p-2 mb-3 shadow-md flex items-center justify-center overflow-hidden">
-              <Image src="/icon.png" alt="Logo" width={60} height={60} className="object-contain" />
-            </div>
+            <Image src="/icon.png" alt="Logo" width={80} height={80} className="object-contain mb-3" />
             <h2 className="text-2xl font-bold text-white">Login Admin</h2>
             <p className="text-green-200 mt-1 text-sm">Kelurahan Putussibau Kota</p>
           </div>
