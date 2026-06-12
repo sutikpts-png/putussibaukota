@@ -120,11 +120,11 @@ export default function SurveyPage() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
           <h2 className="text-lg font-bold text-gray-800 mb-6 border-b pb-2"><i className="fas fa-chart-pie text-blue-600 mr-2"></i>Statistik Kepuasan Masyarakat</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-64">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto">
             {/* Kemudahan Prosedur */}
             <div className="flex flex-col items-center">
               <h3 className="text-sm font-semibold text-gray-600 mb-2">Kemudahan Prosedur</h3>
-              <div className="w-full h-full">
+              <div className="w-full h-56">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -144,12 +144,18 @@ export default function SurveyPage() {
                   </PieChart>
                 </ResponsiveContainer>
               </div>
+              <div className="mt-2 text-xs text-gray-600 text-center leading-relaxed">
+                Sangat Baik = <span className="font-bold text-green-600">{chartDataProsedur[0].value}</span>,{' '}
+                Baik = <span className="font-bold text-blue-600">{chartDataProsedur[1].value}</span>,{' '}
+                Cukup = <span className="font-bold text-yellow-600">{chartDataProsedur[2].value}</span>,{' '}
+                Kurang = <span className="font-bold text-red-600">{chartDataProsedur[3].value}</span>
+              </div>
             </div>
 
             {/* Kecepatan Pelayanan */}
             <div className="flex flex-col items-center">
               <h3 className="text-sm font-semibold text-gray-600 mb-2">Kecepatan Pelayanan</h3>
-              <div className="w-full h-full">
+              <div className="w-full h-56">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -169,12 +175,18 @@ export default function SurveyPage() {
                   </PieChart>
                 </ResponsiveContainer>
               </div>
+              <div className="mt-2 text-xs text-gray-600 text-center leading-relaxed">
+                Sangat Baik = <span className="font-bold text-green-600">{chartDataKecepatan[0].value}</span>,{' '}
+                Baik = <span className="font-bold text-blue-600">{chartDataKecepatan[1].value}</span>,{' '}
+                Cukup = <span className="font-bold text-yellow-600">{chartDataKecepatan[2].value}</span>,{' '}
+                Kurang = <span className="font-bold text-red-600">{chartDataKecepatan[3].value}</span>
+              </div>
             </div>
 
             {/* Kesopanan Petugas */}
             <div className="flex flex-col items-center">
               <h3 className="text-sm font-semibold text-gray-600 mb-2">Kesopanan Petugas</h3>
-              <div className="w-full h-full">
+              <div className="w-full h-56">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -193,6 +205,12 @@ export default function SurveyPage() {
                     <Tooltip content={renderCustomTooltip} />
                   </PieChart>
                 </ResponsiveContainer>
+              </div>
+              <div className="mt-2 text-xs text-gray-600 text-center leading-relaxed">
+                Sangat Baik = <span className="font-bold text-green-600">{chartDataPetugas[0].value}</span>,{' '}
+                Baik = <span className="font-bold text-blue-600">{chartDataPetugas[1].value}</span>,{' '}
+                Cukup = <span className="font-bold text-yellow-600">{chartDataPetugas[2].value}</span>,{' '}
+                Kurang = <span className="font-bold text-red-600">{chartDataPetugas[3].value}</span>
               </div>
             </div>
           </div>
