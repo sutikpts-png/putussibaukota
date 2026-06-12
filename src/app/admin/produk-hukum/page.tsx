@@ -52,10 +52,10 @@ export default function AdminProdukHukum() {
              <table className="w-full text-left text-sm text-slate-600">
                 <thead className="bg-slate-50 border-b border-slate-200 text-xs text-slate-700 uppercase">
                    <tr>
-                      <th className="px-6 py-4 font-black tracking-widest">Dokumen <span className="text-slate-300 ml-1">◆</span></th>
                       <th className="px-6 py-4 font-black tracking-widest">Judul <span className="text-blue-500 ml-1">▲</span></th>
                       <th className="px-6 py-4 font-black tracking-widest">Kategori <span className="text-slate-300 ml-1">◆</span></th>
                       <th className="px-6 py-4 font-black tracking-widest">Nomor/Tahun <span className="text-slate-300 ml-1">◆</span></th>
+                      <th className="px-6 py-4 font-black tracking-widest">Dokumen <span className="text-slate-300 ml-1">◆</span></th>
                       <th className="px-6 py-4 font-black tracking-widest text-right">Aksi</th>
                    </tr>
                 </thead>
@@ -67,16 +67,21 @@ export default function AdminProdukHukum() {
             <table className="w-full text-left text-sm text-slate-600">
               <thead className="bg-slate-50 border-b border-slate-200 text-xs text-slate-700 uppercase">
                 <tr>
-                  <th className="px-6 py-4 font-black tracking-widest">Dokumen <span className="text-slate-300 ml-1">◆</span></th>
                   <th className="px-6 py-4 font-black tracking-widest">Judul <span className="text-blue-500 ml-1">▲</span></th>
                   <th className="px-6 py-4 font-black tracking-widest">Kategori <span className="text-slate-300 ml-1">◆</span></th>
                   <th className="px-6 py-4 font-black tracking-widest">Nomor/Tahun <span className="text-slate-300 ml-1">◆</span></th>
+                  <th className="px-6 py-4 font-black tracking-widest">Dokumen <span className="text-slate-300 ml-1">◆</span></th>
                   <th className="px-6 py-4 font-black tracking-widest text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {produk.map((item) => (
                   <tr key={item.id} className="bg-white hover:bg-slate-50 transition-colors">
+                    <td className="px-6 py-4 font-bold text-slate-900">{item.judul}</td>
+                    <td className="px-6 py-4 font-medium text-slate-500">
+                      <span className="px-2 py-1 bg-slate-100 text-slate-600 rounded-md text-xs font-bold">{item.kategori}</span>
+                    </td>
+                    <td className="px-6 py-4 font-medium text-slate-500">{item.nomor_surat} / {item.tahun}</td>
                     <td className="px-6 py-4 text-slate-500">
                       {item.file_url ? (
                         <a href={item.file_url} target="_blank" rel="noopener noreferrer" className="text-red-500 hover:text-red-700 flex items-center gap-2 font-bold">
@@ -86,11 +91,6 @@ export default function AdminProdukHukum() {
                         <span className="text-slate-400 italic">Tidak ada file</span>
                       )}
                     </td>
-                    <td className="px-6 py-4 font-bold text-slate-900">{item.judul}</td>
-                    <td className="px-6 py-4 font-medium text-slate-500">
-                      <span className="px-2 py-1 bg-slate-100 text-slate-600 rounded-md text-xs font-bold">{item.kategori}</span>
-                    </td>
-                    <td className="px-6 py-4 font-medium text-slate-500">{item.nomor_surat} / {item.tahun}</td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end space-x-1">
                         <Link 
