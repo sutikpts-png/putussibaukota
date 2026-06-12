@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 0;
+export const revalidate = 60; // Cache selama 1 menit (meningkatkan performa secara signifikan)
 
 export default async function RootLayout({
   children,
@@ -31,6 +31,7 @@ export default async function RootLayout({
   return (
     <html lang="id">
       <head>
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
       <body className={`${inter.className} bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col ${temaWarnaClass}`}>

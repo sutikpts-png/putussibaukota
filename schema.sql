@@ -128,3 +128,12 @@ CREATE TABLE public.agenda (
     arsip_url TEXT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
+
+-- Tabel Halaman Web (Custom Pages)
+CREATE TABLE public.halaman (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    judul VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    konten TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);

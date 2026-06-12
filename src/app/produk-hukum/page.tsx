@@ -35,8 +35,8 @@ export default async function ProdukHukumPage() {
               <img src="/logo-jdih.png?v=2" alt="Logo JDIH" className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-green-200 uppercase tracking-widest mb-1 group-hover:text-white transition-colors">Terintegrasi Dengan</span>
-              <span className="text-xl font-extrabold text-white">JDIH KAPUAS HULU</span>
+              <span className="text-xl font-extrabold text-white mb-1">JDIH KAPUAS HULU</span>
+              <span className="text-[10px] font-bold text-green-200 uppercase tracking-widest group-hover:text-white transition-colors">Terintegrasi dengan JDIHN</span>
             </div>
             <i className="fas fa-external-link-alt ml-2 text-white/50 group-hover:text-white/90 transition-colors"></i>
           </a>

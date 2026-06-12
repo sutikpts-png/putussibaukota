@@ -11,7 +11,7 @@ export default function BeritaClient() {
   const [kategori, setKategori] = useState('Semua');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 10;
+  const limit = 15;
 
   const categories = ['Semua', 'Kegiatan', 'Sosial', 'Infrastruktur', 'Budaya', 'Pengumuman'];
 

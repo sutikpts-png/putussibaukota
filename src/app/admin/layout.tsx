@@ -16,7 +16,7 @@ export default function AdminLayout({
 
   useEffect(() => {
     const checkAuth = () => {
-      const isAuth = localStorage.getItem('admin_auth') === 'true';
+      const isAuth = document.cookie.includes('admin_auth=true');
       if (!isAuth) {
         router.push('/login');
       } else {
@@ -28,7 +28,7 @@ export default function AdminLayout({
   }, [router]);
 
   const handleLogout = () => {
-    localStorage.removeItem('admin_auth');
+    document.cookie = "admin_auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     router.push('/login');
   };
 

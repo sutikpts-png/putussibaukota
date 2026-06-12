@@ -286,7 +286,7 @@ export default function SurveyPage() {
         </div>
         
         {/* Pagination Controls */}
-        {!loading && surveys.length > itemsPerPage && (
+        {!loading && surveys.length > 0 && (
           <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between bg-gray-50">
             <div className="text-sm text-gray-500">
               Menampilkan <span className="font-semibold text-gray-700">{indexOfFirstItem + 1}</span> - <span className="font-semibold text-gray-700">{Math.min(indexOfLastItem, surveys.length)}</span> dari <span className="font-semibold text-gray-700">{surveys.length}</span> responden

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
@@ -10,12 +10,36 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  
+  // Captcha state
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const [captchaAnswer, setCaptchaAnswer] = useState('');
+  
   const router = useRouter();
+
+  // Generate captcha on load
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const generateCaptcha = () => {
+    setNum1(Math.floor(Math.random() * 10) + 1);
+    setNum2(Math.floor(Math.random() * 10) + 1);
+    setCaptchaAnswer('');
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setErrorMsg('');
+
+    if (parseInt(captchaAnswer) !== num1 + num2) {
+      setErrorMsg('Jawaban Captcha salah. Silakan coba lagi.');
+      setLoading(false);
+      generateCaptcha();
+      return;
+    }
 
     try {
       const { data, error } = await supabase
@@ -31,11 +55,13 @@ export default function LoginPage() {
       const validPassword = data?.admin_password || 'admin123';
 
       if (username === validUsername && password === validPassword) {
-        localStorage.setItem('admin_auth', 'true');
+        // Set cookie for middleware authentication
+        document.cookie = "admin_auth=true; path=/; max-age=86400"; // 1 day
         router.push('/admin');
       } else {
         setErrorMsg('Login gagal. Periksa kembali Username dan Password Anda.');
         setLoading(false);
+        generateCaptcha();
       }
     } catch (err: any) {
       console.error(err);
@@ -83,6 +109,24 @@ export default function LoginPage() {
                   placeholder="••••••••"
                 />
               </div>
+              
+              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Verifikasi Keamanan (Captcha)</label>
+                <div className="flex items-center gap-4">
+                  <div className="bg-green-100 text-green-800 font-bold px-4 py-2 rounded-lg text-lg select-none">
+                    {num1} + {num2} = ?
+                  </div>
+                  <input 
+                    type="number" 
+                    required 
+                    value={captchaAnswer}
+                    onChange={(e) => setCaptchaAnswer(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none transition"
+                    placeholder="Hasil"
+                  />
+                </div>
+              </div>
+              
               <button 
                 type="submit" 
                 disabled={loading}
