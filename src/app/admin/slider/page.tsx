@@ -71,17 +71,18 @@ export default function PengaturanSlider() {
                 <th className="p-4 font-semibold text-gray-600">Judul</th>
                 <th className="p-4 font-semibold text-gray-600 text-center">Aktif</th>
                 <th className="p-4 font-semibold text-gray-600 text-center">Urutan</th>
+                <th className="p-4 font-semibold text-gray-600 text-center">Tanggal Update</th>
                 <th className="p-4 font-semibold text-gray-600 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-gray-500">Memuat data slider...</td>
+                  <td colSpan={6} className="p-8 text-center text-gray-500">Memuat data slider...</td>
                 </tr>
               ) : sliders.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-gray-500">
+                  <td colSpan={6} className="p-8 text-center text-gray-500">
                     <i className="fas fa-images text-3xl mb-3 text-gray-300 block"></i>
                     Belum ada data slide. Klik "Tambah Slide" untuk memulai.
                   </td>
@@ -111,6 +112,9 @@ export default function PengaturanSlider() {
                     </td>
                     <td className="p-4 text-center font-semibold text-gray-700">
                       {slide.urutan}
+                    </td>
+                    <td className="p-4 text-center text-sm text-gray-600">
+                      {slide.created_at ? new Date(slide.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : '-'}
                     </td>
                     <td className="p-4 text-center">
                       <div className="flex items-center justify-center gap-2">
