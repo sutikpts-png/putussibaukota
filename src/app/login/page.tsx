@@ -76,7 +76,7 @@ export default function LoginPage() {
       <div className="flex-grow flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="bg-green-900 p-6 text-center flex flex-col items-center">
-            <Image src="/icon.png" alt="Logo" width={80} height={80} className="object-contain mb-3" />
+            <Image src="/icon.png" alt="Logo" width={40} height={40} className="object-contain mb-3" />
             <h2 className="text-2xl font-bold text-white">Login Admin</h2>
             <p className="text-green-200 mt-1 text-sm">Kelurahan Putussibau Kota</p>
           </div>
@@ -115,7 +115,7 @@ export default function LoginPage() {
               <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Verifikasi Keamanan (Captcha)</label>
                 <div className="flex items-center gap-4">
-                  <div className="bg-green-100 text-green-800 font-bold px-4 py-2 rounded-lg text-lg select-none">
+                  <div className="bg-green-100 text-green-800 font-bold px-4 py-2 rounded-lg text-lg select-none whitespace-nowrap">
                     {num1} + {num2} = ?
                   </div>
                   <input 
